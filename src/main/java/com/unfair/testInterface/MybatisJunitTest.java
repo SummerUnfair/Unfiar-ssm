@@ -78,12 +78,18 @@ public class MybatisJunitTest {
 
 
     /**
-     * 测试map操作
+     * 测试map操作单行数据
      */
     @Test
     public void mapTest(){
-
         Map<String, Object> stuAsMapById = mapper.getStuAsMapById(1);
+        if(stuAsMapById !=null){
+            if (stuAsMapById.containsKey("id")){
+                System.out.println("id :"+stuAsMapById.get("id")+" "+"username :"+stuAsMapById.get("username") );
+            }
+        }else{
+            System.out.println("this id not exist ..");
+        }
         System.out.println(stuAsMapById);
     }
 
@@ -113,15 +119,18 @@ public class MybatisJunitTest {
     }
 
     /**
-     * 测试更新部分操作
+     * 更新单行数据(根据id更新)
      */
     @Test
     public void updateUsrTest(){
-        HashMap map = new HashMap<>();
+        Map<String, Object> retMap = new HashMap<String, Object>();
+        HashMap<String,Object> map = new HashMap<>();
         map.put("id",2);
         map.put("username","莉莉");
         int i=mapper.updateUsr(map);
         System.out.println(i);
+        retMap.put("status", 0);
+        retMap.put("msg", "更新成功！");
 
     }
 

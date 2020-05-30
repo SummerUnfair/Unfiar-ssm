@@ -9,15 +9,24 @@
       select * from  ${table} where username= #{username}
     </select>
 
-    <!--查询多条-->
+    <!--查询多行--><!--基本类型输入 map输出-->
     <select id="getAllStuAsMapById"  parameterType="int" resultType="map">
       select * from usr
     </select>
-
-    <!--查询单条-->
+    <!--查询单行--><!-- 基本类型输入 map输出-->
     <select id="getStuAsMapById"  parameterType="int" resultType="map">
       select * from usr where id=#{id}
     </select>
+    <!--更新单行--><!--map输入 无输出-->
+    <update id="updateUsr" parameterType="map">
+        update usr
+        <set>
+            <if test="username !=null">
+                username =#{username}
+            </if>
+        </set>
+        where id = #{id}
+    </update>
 
     <!--查询所有-->
     <select id="findAll"  resultType="user">
@@ -41,17 +50,6 @@
           </choose>
       </where>
     </select>
-
-    <update id="updateUsr" parameterType="map">
-        update usr
-        <set>
-            <if test="username !=null">
-                username =#{username}
-            </if>
-        </set>
-        where id = #{id}
-    </update>
-
     <!--&lt;!&ndash;查询所有&ndash;&gt;-->
     <!--<select id="findAll"  resultType="com.unfair.pojo.User">-->
     <!--select * from usr ;-->
