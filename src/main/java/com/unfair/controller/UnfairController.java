@@ -6,30 +6,54 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.unfair.pojo.User;
 import com.unfair.pojo.requestBodyPO;
 import com.unfair.service.UserService;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
-@RequestMapping("/helloController")
-public class HelloController {
+@RequestMapping("/unfairController")
+public class UnfairController {
 
     @Autowired
     private UserService userService;
 
-
+    private static Log LOGGER = LogFactory.getLog(UnfairController.class);
+    /**
+     *@RequestParam测试
+     *  1.增加字符转小写
+     *  2.增加去除字符()（）
+     */
     @RequestMapping(value = "/contest")
     @ResponseBody
-    public String contextPathTest(HttpServletRequest request)  {
-
+    public String contextPathTest(@RequestParam(name = "unfair_name", required = true)Object unfair_name, HttpServletRequest request)  {
         String realPath = request.getSession().getServletContext().getRealPath("/");
-
-        return realPath+"测试";
-
+        String str=unfair_name.toString().toLowerCase();   //字符转小写
+        str= str.replaceAll("[\\（\\(\\）\\)]", ""); //去除字符中大小括号()（）
+        LOGGER.info(realPath+"测试"+" "+str);
+        return realPath+"测试"+" "+str;
     }
+
+    /**
+     *@@ResponseBody测试
+     * 将数据返回给浏览器,如果是对象,转为json返回给浏览器
+     */
+    @RequestMapping(value = "/mapTest")
+    @ResponseBody
+    public Map mapTest(){
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        resultMap.put("status", "1");
+        resultMap.put("msg", "请求地址全称为空");
+        return resultMap;
+    }
+
+
 
     @RequestMapping(value = "/json1")
     @ResponseBody
