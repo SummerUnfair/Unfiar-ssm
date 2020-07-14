@@ -8,26 +8,6 @@
     http://www.springframework.org/schema/context
     http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-    <!-- 配置注解扫描 -->
-    <context:component-scan base-package="com.unfair.service"/>
-    <context:component-scan base-package="com.unfair.aopUtils"/>
-    <!--<bean id="annotationPointCut" class="com.unfair.aopUtils.AnnotationPointCut" />-->
-    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="order" value="1" />
-        <property name="systemPropertiesModeName" value="SYSTEM_PROPERTIES_MODE_OVERRIDE" />
-        <property name="ignoreResourceNotFound" value="true" />
-        <property name="fileEncoding" value="UTF-8" />
-        <property name="locations">
-            <list>
-                <value>classpath:runtime.properties</value>
-            </list>
-        </property>
-        <property name="placeholderPrefix" value="@[" />
-        <property name="placeholderSuffix" value="]" />
-    </bean>
-
-    <!--开启aop注解支持 JDK（默认proxy-target-class="false"） cglib(proxy-target-class="true")-->
-    <aop:aspectj-autoproxy proxy-target-class="true"/>
     <!-- 数据库连接池 -->
     <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
         <!-- 配置连接池属性 -->
@@ -68,6 +48,5 @@
 
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
     </bean>
-
 
 </beans>

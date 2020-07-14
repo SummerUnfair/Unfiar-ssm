@@ -8,7 +8,7 @@ public class ServiceJunitTest {
 
     public static void main (String[] args)
     {
-        ApplicationContext ac = new ClassPathXmlApplicationContext("spring/bean.xml");
+        ApplicationContext ac = new ClassPathXmlApplicationContext("spring-common.xml");
         UserService user = (UserService) ac.getBean("userServiceimpl");
         user.findAll();
     }

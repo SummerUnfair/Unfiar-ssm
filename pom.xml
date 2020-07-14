@@ -62,7 +62,7 @@
       <artifactId>c3p0</artifactId>
       <version>0.9.1.2</version>
     </dependency>
-    <!-- spring -->
+    <!-- context -->
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-jdbc</artifactId>

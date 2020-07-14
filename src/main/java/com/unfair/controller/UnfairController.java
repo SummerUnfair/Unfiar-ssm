@@ -17,7 +17,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/unfairController")
+@RequestMapping("/unfairHome")
 public class UnfairController {
 
     @Autowired
@@ -29,8 +29,9 @@ public class UnfairController {
      * RequestBody测试
      * @param body
      * @return username=2343&password=3&money=1
+     * function:RequestBody Test
      */
-    @PostMapping("/testRequestBody")
+    @PostMapping("/Login")
     public String testRequestBody(@RequestBody String body){
         System.out.println(body);
         return  "success";

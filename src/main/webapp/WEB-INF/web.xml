@@ -13,7 +13,7 @@
     <!-- 加载spring容器 -->
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>classpath:spring/bean.xml</param-value>
+        <param-value>classpath:spring-common.xml</param-value>
     </context-param>
     <!-- 配置Spring的servlet监听器 -->
     <listener>
@@ -45,7 +45,7 @@
         <init-param>
             <!--https://blog.csdn.net/vicroad2014/article/details/82384370-->
             <param-name>contextConfigLocation</param-name>
-            <param-value>classpath:spring/springmvc.xml</param-value>
+            <param-value>classpath:context/springmvc.xml</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
