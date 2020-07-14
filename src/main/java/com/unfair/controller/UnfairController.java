@@ -4,7 +4,6 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.unfair.pojo.User;
-import com.unfair.pojo.requestBodyPO;
 import com.unfair.service.UserService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -25,6 +24,18 @@ public class UnfairController {
     private UserService userService;
 
     private static Log LOGGER = LogFactory.getLog(UnfairController.class);
+
+    /**
+     * RequestBody测试
+     * @param body
+     * @return username=2343&password=3&money=1
+     */
+    @PostMapping("/testRequestBody")
+    public String testRequestBody(@RequestBody String body){
+        System.out.println(body);
+        return  "success";
+    }
+
     /**
      *@RequestParam测试
      *  1.增加字符转小写
@@ -75,18 +86,6 @@ public class UnfairController {
         ObjectMapper mapper = new ObjectMapper();
         User user1 = mapper.readValue(a, User.class);
         return user1;
-    }
-
-
-    /**
-     * RequestBody测试
-     * @param body
-     * @return
-     */
-    @RequestMapping("/testRequestBody")
-    public String testRequestBody(@RequestBody requestBodyPO body){
-        System.out.println(body);
-        return  "success";
     }
 
     /**

@@ -1,4 +1,4 @@
-package com.unfair.pojo;/*
+package com.unfair.api.DTO;/*
  * @author Ferao
  * @date
  * @discription
@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @AllArgsConstructor
-public class requestBodyPO {
+public class RequestBodyDTO {
 
     @JSONField(name = "username")
     private String username;

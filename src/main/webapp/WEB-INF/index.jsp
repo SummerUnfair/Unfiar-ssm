@@ -8,20 +8,26 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
-    <title>Title</title>
+    <title>unfair-ssm</title>
     <script type="text/javascript" src="webjars/jquery/jquery.js" ></script>
     <script type="text/javascript">
-        alert('hello.world');
+        //alert('hello.world');
+        console.log('ferao jsp 页面');
     </script>
 </head>
 <body>
 
-<h3>入门程序</h3>
+<h3>unfair|首页</h3><hr/>
+<%--请求参数绑定--%>
+<form action="/unfairController/testRequestBody" method="post" >
+    RequestBody测试<br/>
+    账号：<input type="text" name="username" /> <br/>
+    密码：<input type="text" name="password" /> <br/>
+    金额：<input type="text" name="money" /> <br/>
+    <input type="submit" value="提交" />
+</form><hr/>
+
 <%--<a href="hello">入门程序</a>--%>
-
-
-
-
 <c:forEach begin="1" end="10" var="i" step="1">
     ${i}<br>
 </c:forEach>
@@ -83,16 +89,6 @@ ${requestScope.u}
 ${requestScope.name}
 ${sessionScope.age}
 
-
-
-
-
-
-
-
-
-
-
 <%!
     static{
         System.out.println("Loading Ferao");
@@ -115,15 +111,7 @@ ${3>4 && 3<4 }<br>
 %>
 name:<%=name %>
 测试热部署<br/>
-<%--请求参数绑定--%>
-<form action="/helloController/testRequestBody" method="post" >
 
-    testRequestBody：<input type="text" name="username" /> <br/>
-    密码：<input type="text" name="password" /> <br/>
-    金额：<input type="text" name="money" /> <br/>
-    <input type="submit" value="提交" />
-
-</form>
 
 <hr>
 <form action="/item/hello" method="post" >
