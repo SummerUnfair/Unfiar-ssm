@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.unfair.pojo.User;
 import com.unfair.service.UserService;
+import com.unfair.utils.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +33,23 @@ public class UnfairController {
      * function:RequestBody Test
      */
     @PostMapping("/Login")
-    public String testRequestBody(@RequestBody String body){
+    public String login(@RequestBody String body){
         System.out.println(body);
         return  "success";
+    }
+
+    /**
+     *@@ResponseBody测试
+     * 将数据返回给浏览器,如果是对象,转为json返回给浏览器
+     */
+    @GetMapping("/JsonStyle")
+    @ResponseBody
+    public Map jsonStyle(){
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        resultMap.put("titile", "主题");
+        resultMap.put("message", "展示简单得Json格式");
+        resultMap.put("status", "success");
+        return resultMap;
     }
 
     /**
@@ -46,26 +61,10 @@ public class UnfairController {
     @ResponseBody
     public String contextPathTest(@RequestParam(name = "unfair_name", required = true)Object unfair_name, HttpServletRequest request)  {
         String realPath = request.getSession().getServletContext().getRealPath("/");
-        String str=unfair_name.toString().toLowerCase();   //字符转小写
-        str= str.replaceAll("[\\（\\(\\）\\)]", ""); //去除字符中大小括号()（）
-        LOGGER.info(realPath+"测试"+" "+str);
+        String str=StringUtils.removeSign(StringUtils.toLowerCase(unfair_name));
+        LOGGER.info("字符处理结果:"+" "+str);
         return realPath+"测试"+" "+str;
     }
-
-    /**
-     *@@ResponseBody测试
-     * 将数据返回给浏览器,如果是对象,转为json返回给浏览器
-     */
-    @RequestMapping(value = "/mapTest")
-    @ResponseBody
-    public Map mapTest(){
-        Map<String, Object> resultMap = new HashMap<String, Object>();
-        resultMap.put("status", "1");
-        resultMap.put("msg", "请求地址全称为空");
-        return resultMap;
-    }
-
-
 
     @RequestMapping(value = "/json1")
     @ResponseBody

@@ -1,4 +1,4 @@
-package com.unfair.api.DTO;/*
+package com.unfair.api.dto;/*
  * @author Ferao
  * @date
  * @discription

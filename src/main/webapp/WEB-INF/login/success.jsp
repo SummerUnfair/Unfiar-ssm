@@ -12,6 +12,10 @@
 
 <h3>ヽ(✿ﾟ▽ﾟ)ノ 欢迎回家</h3>
 
+<a href="/unfairHome/JsonStyle" target="_self">
+    <input type="button" name="unfairButton" value="Json是这个样子的" />
+</a>
+
 <c:forEach begin="1" end="10" var="i" step="1">
     ${i}<br>
 </c:forEach>
