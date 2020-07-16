@@ -16,6 +16,16 @@
     <input type="button" name="unfairButton" value="Json是这个样子的" />
 </a>
 
+<h4>全员信息</h4>
+${Users}
+
+<%--未生效--%>
+<c:forEach items="${Users}" var="userMessage" >
+    ${userMessage.id}<br>
+    ${userMessage.username}<br>
+</c:forEach>
+
+
 <c:forEach begin="1" end="10" var="i" step="1">
     ${i}<br>
 </c:forEach>

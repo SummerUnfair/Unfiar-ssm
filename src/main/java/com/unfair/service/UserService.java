@@ -1,6 +1,9 @@
 package com.unfair.service;
 
-public interface UserService {
+import com.unfair.pojo.User;
 
-    public void findAll();
+import java.util.List;
+
+public interface UserService {
+    public List<User> findAll();
 }

@@ -14,12 +14,8 @@ public class UserServiceimpl implements UserService {
     @Autowired
     UserMapper userMapper;
     @Override
-    public void findAll() {
-        List<User> users=userMapper.findAll();
-        for (User user : users){
-            System.out.println(user);
-        }
-        System.out.println("userService findAll success");
+    public List<User> findAll() {
+        return userMapper.findAll();
     }
 
 }

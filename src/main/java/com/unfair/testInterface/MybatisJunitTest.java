@@ -73,7 +73,6 @@ public class MybatisJunitTest {
         for (User user : usr) {
             System.out.println(user);
         }
-
     }
 
 

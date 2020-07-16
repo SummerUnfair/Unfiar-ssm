@@ -10,11 +10,14 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -33,8 +36,13 @@ public class UnfairController {
      * function:RequestBody Test
      */
     @PostMapping("/Login")
-    public String login(@RequestBody String body){
-        System.out.println(body);
+    public String login(@RequestBody String body,Model model){
+        LOGGER.info("@RequestBody返回内容:"+body);
+        List<User> user = userService.findAll();
+        for (User user1 : user) {
+            System.out.println(user1);
+        }
+        model.addAttribute("Users",user);
         return  "success";
     }
 
@@ -66,6 +74,16 @@ public class UnfairController {
         return realPath+"测试"+" "+str;
     }
 
+    @RequestMapping(value = "/json2")
+    @ResponseBody
+    public User json2() throws IOException {
+        String a= "{\"id\":1,\"username\":\"男\"}";
+        ObjectMapper mapper = new ObjectMapper();
+        User user1 = mapper.readValue(a, User.class);
+        return user1;
+    }
+
+
     @RequestMapping(value = "/json1")
     @ResponseBody
     public String json1() throws JsonProcessingException {
@@ -77,15 +95,6 @@ public class UnfairController {
         String str = mapper.writeValueAsString(user);
         System.out.println(str);
         return str;
-    }
-
-    @RequestMapping(value = "/json2")
-    @ResponseBody
-    public User json2() throws IOException {
-        String a= "{\"id\":1,\"username\":\"男\"}";
-        ObjectMapper mapper = new ObjectMapper();
-        User user1 = mapper.readValue(a, User.class);
-        return user1;
     }
 
     /**

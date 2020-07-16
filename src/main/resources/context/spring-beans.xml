@@ -14,7 +14,7 @@
     <!--<bean id="annotationPointCut" class="com.unfair.aopUtils.AnnotationPointCut" />-->
 
     <!--开启aop注解支持 JDK（默认proxy-target-class="false"） cglib(proxy-target-class="true")-->
-    <aop:aspectj-autoproxy proxy-target-class="true"/>
+    <!--<aop:aspectj-autoproxy proxy-target-class="true"/>-->
 
 
 
