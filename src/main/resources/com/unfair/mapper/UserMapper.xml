@@ -4,6 +4,13 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.unfair.mapper.UserMapper">
 
+    <sql id="userColumns">
+        id,
+        username,
+        create_time,
+        update_time
+    </sql>
+
     <!--查询多条-->
     <select id="findAllTable"  parameterType="map" resultType="user" >
       select * from  ${table} where 1=1
@@ -18,7 +25,7 @@
     </select>
     <!--查询单行--><!-- 基本类型输入 map输出-->
     <select id="getStuAsMapById"  parameterType="int" resultType="map">
-      select * from usr where id=#{id}
+      select *  from usr where id=#{id}
     </select>
     <!--更新单行--><!--map输入 无输出-->
     <update id="updateUsr" parameterType="map">
@@ -33,7 +40,9 @@
 
     <!--查询所有-->
     <select id="findAll"  resultType="user">
-      select * from usr ;
+      select
+       <include refid="userColumns"/>
+        from usr
     </select>
 
     <!--queryUser-->

@@ -82,11 +82,11 @@ public class UnfairController {
         //创建一个jackson的对象映射器，用来解析数据
         ObjectMapper mapper = new ObjectMapper();
         //创建一个对象
-        UserVO userVO = new UserVO(1, "男");
-        //将我们的对象解析成为json格式
-        String str = mapper.writeValueAsString(userVO);
-        System.out.println(str);
-        return str;
+//        UserVO userVO = new UserVO(1, "男");
+//        //将我们的对象解析成为json格式
+//        String str = mapper.writeValueAsString(userVO);
+//        System.out.println(str);
+        return null;
     }
 
     /**

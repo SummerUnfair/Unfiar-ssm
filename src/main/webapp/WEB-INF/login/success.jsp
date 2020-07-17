@@ -21,7 +21,9 @@
 
 <c:forEach items="${userVO}" var="userMessage" >
     ${userMessage.id}
-    ${userMessage.username}<br>
+    ${userMessage.username}
+    ${userMessage.create_time}
+    ${userMessage.update_time}<br>
 </c:forEach>
 <h4>日期时间</h4>
 <%

@@ -11,7 +11,7 @@
     </settings>
 
     <typeAliases>
-        <package name="com.unfair.pojo"></package>
+        <package name="com.unfair.api"></package>
     </typeAliases>
     <!--<typeAliases>-->
         <!--<typeAlias type="com.unfair.api.vo.UserVO" alias="user" />-->

@@ -138,11 +138,11 @@ public class MybatisJunitTest {
      */
     @Test
     public void saveTest(){
-        UserVO userVO = new UserVO(4,"丽丽");
-        //执行保存方法
-        mapper.saveUser(userVO);
-        System.out.println("success");
-        System.out.println(session);
+//        UserVO userVO = new UserVO(4,"丽丽");
+//        //执行保存方法
+//        mapper.saveUser(userVO);
+//        System.out.println("success");
+//        System.out.println(session);
     }
 
 
@@ -152,10 +152,10 @@ public class MybatisJunitTest {
      */
     @Test
     public void updateTest(){
-        UserVO userVO = new UserVO(1,"丽丽");
-        //执行保存方法
-        mapper.updateUser(userVO);
-        System.out.println("success");
+//        UserVO userVO = new UserVO(1,"丽丽");
+//        //执行保存方法
+//        mapper.updateUser(userVO);
+//        System.out.println("success");
     }
     /**
      * 测试删除操作

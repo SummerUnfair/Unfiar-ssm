@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.apache.ibatis.type.Alias;
 
+import java.util.Date;
 import java.util.Objects;
 
 @Alias("user")
@@ -15,6 +16,8 @@ public class UserVO implements  Comparable<UserVO> {
 
     private int id ;
     private String username;
+    private String create_time;
+    private String update_time;
 
     @Override
     public boolean equals(Object o) {
