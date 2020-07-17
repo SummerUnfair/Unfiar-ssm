@@ -1,12 +1,13 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="com.unfair.pojo.User" %>
+<%@ page import="com.unfair.api.vo.UserVO" %>
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.HashMap" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
-    <title>Title</title>
+    <title>欢迎回家</title>
 </head>
 <body>
 
@@ -17,18 +18,27 @@
 </a>
 
 <h4>全员信息</h4>
-${Users}
 
-<%--未生效--%>
-<c:forEach items="${Users}" var="userMessage" >
-    ${userMessage.id}<br>
+<c:forEach items="${userVO}" var="userMessage" >
+    ${userMessage.id}
     ${userMessage.username}<br>
 </c:forEach>
+<h4>日期时间</h4>
+<%
+    request.setAttribute("number",3);
+%>
+<c:choose>
+    <c:when test="${weekNumber==1}">星期一</c:when>
+    <c:when test="${weekNumber==2}">星期二</c:when>
+    <c:when test="${weekNumber==3}">星期三</c:when>
+    <c:when test="${weekNumber==4}">星期四</c:when>
+    <c:when test="${weekNumber==5}">星期五</c:when>
+    <c:when test="${weekNumber==6}">星期六</c:when>
+    <c:when test="${weekNumber==7}">星期天</c:when>
+    <c:otherwise>数字有误</c:otherwise>
+</c:choose>
+<br>
 
-
-<c:forEach begin="1" end="10" var="i" step="1">
-    ${i}<br>
-</c:forEach>
 <%
     List list= new ArrayList<>();
     list.add("111");
@@ -45,24 +55,12 @@ ${Users}
 <c:if test="false">
     我是真
 </c:if>
-<%
-    request.setAttribute("number",3);
-%>
-<c:choose>
-    <c:when test="${number==1}">星期一</c:when>
-    <c:when test="${number==2}">星期二</c:when>
-    <c:when test="${number==3}">星期三</c:when>
-    <c:when test="${number==4}">星期四</c:when>
-    <c:when test="${number==5}">星期五</c:when>
-    <c:otherwise>数字有误</c:otherwise>
-</c:choose>
-
 
 <%
-    User user = new User();
-    user.setUsername("ferao");
-    user.setId(2);
-    request.setAttribute("u",user);
+    UserVO userVO = new UserVO();
+    userVO.setUsername("ferao");
+    userVO.setId(2);
+    request.setAttribute("u", userVO);
 
     List lists = new ArrayList<>();
     lists.add("add");

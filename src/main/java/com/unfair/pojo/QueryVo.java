@@ -1,14 +1,16 @@
 package com.unfair.pojo;
 
+import com.unfair.api.vo.UserVO;
+
 public class QueryVo {
 
-    private User user ;
+    private UserVO userVO;
 
-    public User getUser() {
-        return user;
+    public UserVO getUserVO() {
+        return userVO;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserVO(UserVO userVO) {
+        this.userVO = userVO;
     }
 }

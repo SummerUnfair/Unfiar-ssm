@@ -3,15 +3,15 @@ package com.unfair.controller;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import com.unfair.pojo.User;
+import com.unfair.api.vo.UserVO;
 import com.unfair.service.UserService;
 import com.unfair.utils.StringUtils;
+import com.unfair.utils.TimeUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -37,12 +37,10 @@ public class UnfairController {
      */
     @PostMapping("/Login")
     public String login(@RequestBody String body,Model model){
-        LOGGER.info("@RequestBody返回内容:"+body);
-        List<User> user = userService.findAll();
-        for (User user1 : user) {
-            System.out.println(user1);
-        }
-        model.addAttribute("Users",user);
+        LOGGER.info("@RequestBody返回内容:"+StringUtils.removeSign(StringUtils.toLowerCase(body)));
+        List<UserVO> userVO = userService.findAll();
+        model.addAttribute("userVO", userVO);
+        model.addAttribute("weekNumber", TimeUtils.get_Now_Week_Number()-1);
         return  "success";
     }
 
@@ -62,27 +60,21 @@ public class UnfairController {
 
     /**
      *@RequestParam测试
-     *  1.增加字符转小写
-     *  2.增加去除字符()（）
      */
     @RequestMapping(value = "/contest")
     @ResponseBody
     public String contextPathTest(@RequestParam(name = "unfair_name", required = true)Object unfair_name, HttpServletRequest request)  {
-        String realPath = request.getSession().getServletContext().getRealPath("/");
-        String str=StringUtils.removeSign(StringUtils.toLowerCase(unfair_name));
-        LOGGER.info("字符处理结果:"+" "+str);
-        return realPath+"测试"+" "+str;
+        String realPath =null;
+        try {
+            realPath = request.getSession().getServletContext().getRealPath("/");
+            String a= "{\"id\":1,\"username\":\"男\"}";
+            ObjectMapper mapper = new ObjectMapper();
+            UserVO userVO1 = mapper.readValue(a, UserVO.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return realPath+"测试";
     }
-
-    @RequestMapping(value = "/json2")
-    @ResponseBody
-    public User json2() throws IOException {
-        String a= "{\"id\":1,\"username\":\"男\"}";
-        ObjectMapper mapper = new ObjectMapper();
-        User user1 = mapper.readValue(a, User.class);
-        return user1;
-    }
-
 
     @RequestMapping(value = "/json1")
     @ResponseBody
@@ -90,9 +82,9 @@ public class UnfairController {
         //创建一个jackson的对象映射器，用来解析数据
         ObjectMapper mapper = new ObjectMapper();
         //创建一个对象
-        User user = new User(1, "男");
+        UserVO userVO = new UserVO(1, "男");
         //将我们的对象解析成为json格式
-        String str = mapper.writeValueAsString(user);
+        String str = mapper.writeValueAsString(userVO);
         System.out.println(str);
         return str;
     }

@@ -3,7 +3,7 @@ package com.unfair.testInterface;
 
 import com.unfair.mapper.UserMapper;
 import com.unfair.pojo.QueryVo;
-import com.unfair.pojo.User;
+import com.unfair.api.vo.UserVO;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -69,9 +69,9 @@ public class MybatisJunitTest {
         Map<String,Object> map = new HashMap<String,Object>();
         map.put("table","usr");
         map.put("username","丽丽");
-        List<User> usr = mapper.findAllTable(map);
-        for (User user : usr) {
-            System.out.println(user);
+        List<UserVO> usr = mapper.findAllTable(map);
+        for (UserVO userVO : usr) {
+            System.out.println(userVO);
         }
     }
 
@@ -97,9 +97,9 @@ public class MybatisJunitTest {
      */
     @Test
     public void findAllTest(){
-        List<User> users=mapper.findAll();
-        for (User user : users){
-            System.out.println(user);
+        List<UserVO> userVOS =mapper.findAll();
+        for (UserVO userVO : userVOS){
+            System.out.println(userVO);
         }
     }
 
@@ -111,9 +111,9 @@ public class MybatisJunitTest {
         HashMap map = new HashMap<>();
         //map.put("id",2);
         map.put("username","丽丽");
-        List<User> users=mapper.queryUser(map);
-        for (User user : users){
-            System.out.println(user);
+        List<UserVO> userVOS =mapper.queryUser(map);
+        for (UserVO userVO : userVOS){
+            System.out.println(userVO);
         }
     }
 
@@ -138,9 +138,9 @@ public class MybatisJunitTest {
      */
     @Test
     public void saveTest(){
-        User user = new User(4,"丽丽");
+        UserVO userVO = new UserVO(4,"丽丽");
         //执行保存方法
-        mapper.saveUser(user);
+        mapper.saveUser(userVO);
         System.out.println("success");
         System.out.println(session);
     }
@@ -152,9 +152,9 @@ public class MybatisJunitTest {
      */
     @Test
     public void updateTest(){
-        User user = new User(1,"丽丽");
+        UserVO userVO = new UserVO(1,"丽丽");
         //执行保存方法
-        mapper.updateUser(user);
+        mapper.updateUser(userVO);
         System.out.println("success");
     }
     /**
@@ -162,7 +162,7 @@ public class MybatisJunitTest {
      */
     @Test
     public void deleteTest(){
-        User user = new User();
+        UserVO userVO = new UserVO();
         mapper.deleteUser(4);
         System.out.println("success");
     }
@@ -172,8 +172,8 @@ public class MybatisJunitTest {
      */
     @Test
     public void findByIdTest(){
-        User user = mapper.findById(3);
-        System.out.println(user);
+        UserVO userVO = mapper.findById(3);
+        System.out.println(userVO);
         System.out.println("success");
     }
     /**
@@ -191,11 +191,11 @@ public class MybatisJunitTest {
     @Test
     public void testFindByVo(){
         QueryVo vo = new QueryVo();
-        User user = new User();
-        user.setUsername("%丽%");
-        vo.setUser(user);
-        List<User> users=mapper.findUserByVo(vo);
-        for (User u : users){
+        UserVO userVO = new UserVO();
+        userVO.setUsername("%丽%");
+        vo.setUserVO(userVO);
+        List<UserVO> userVOS =mapper.findUserByVo(vo);
+        for (UserVO u : userVOS){
             System.out.println(u);
         }
     }
@@ -210,10 +210,10 @@ public class MybatisJunitTest {
         map.put("startIndex",0);
         map.put("pageSize",3);
 
-        List<User> userList = mapper.getUserByLimit(map);
+        List<UserVO> userVOList = mapper.getUserByLimit(map);
 
-        for (User user : userList) {
-            System.out.println(user);
+        for (UserVO userVO : userVOList) {
+            System.out.println(userVO);
         }
     }
 

@@ -14,7 +14,7 @@
         <package name="com.unfair.pojo"></package>
     </typeAliases>
     <!--<typeAliases>-->
-        <!--<typeAlias type="com.unfair.pojo.User" alias="user" />-->
+        <!--<typeAlias type="com.unfair.api.vo.UserVO" alias="user" />-->
     <!--</typeAliases>-->
 
 

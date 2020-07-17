@@ -1,4 +1,4 @@
-<%@ page import="com.unfair.pojo.User" %>
+<%@ page import="com.unfair.api.vo.UserVO" %>
 <%@ page import="java.lang.reflect.Array" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.List" %>

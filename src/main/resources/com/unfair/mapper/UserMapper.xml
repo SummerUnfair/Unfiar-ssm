@@ -54,16 +54,16 @@
       </where>
     </select>
     <!--&lt;!&ndash;查询所有&ndash;&gt;-->
-    <!--<select id="findAll"  resultType="com.unfair.pojo.User">-->
+    <!--<select id="findAll"  resultType="com.unfair.api.vo.UserVO">-->
     <!--select * from usr ;-->
     <!--</select>-->
 
     <!--保存用户-->
-    <insert id="saveUser" parameterType="com.unfair.pojo.User">
+    <insert id="saveUser" parameterType="com.unfair.api.vo.UserVO">
         insert into usr(id,username) values ( #{id},#{username});
     </insert>
     <!--更新用户-->
-    <update id="updateUser" parameterType="com.unfair.pojo.User" >
+    <update id="updateUser" parameterType="com.unfair.api.vo.UserVO" >
         update usr set username=#{username} where  id =#{id}
     </update>
     <!--删除用户-->
@@ -71,11 +71,11 @@
         delete from usr where id = #{id}
     </delete>
     <!--根据id查询用户-->
-    <select id="findById" parameterType="int" resultType="com.unfair.pojo.User">
+    <select id="findById" parameterType="int" resultType="com.unfair.api.vo.UserVO">
         select * from usr where id=#{uid}
     </select>
     <!--根据名称模糊查询-->
-    <select id="findByName" parameterType="string" resultType="com.unfair.pojo.User">
+    <select id="findByName" parameterType="string" resultType="com.unfair.api.vo.UserVO">
         select * from usr where username like #{name}
     </select>
     <!--获取用户的总记录条数-->
@@ -83,7 +83,7 @@
         select count(id) from usr;
     </select>
     <!--根据queryVo的条件查询用户-->
-    <select id="findUserByVo" parameterType="com.unfair.pojo.QueryVo" resultType="com.unfair.pojo.User">
+    <select id="findUserByVo" parameterType="com.unfair.pojo.QueryVo" resultType="com.unfair.api.vo.UserVO">
         select * from usr where username like #{user.username}
     </select>
 

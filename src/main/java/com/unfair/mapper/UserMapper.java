@@ -1,7 +1,7 @@
 package com.unfair.mapper;
 
 import com.unfair.pojo.QueryVo;
-import com.unfair.pojo.User;
+import com.unfair.api.vo.UserVO;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -13,7 +13,7 @@ import java.util.Map;
 @Component
 public interface UserMapper {
 
-    List<User> findAllTable(Map tables);
+    List<UserVO> findAllTable(Map tables);
 
     Map<String, Object> getStuAsMapById(Integer id);
 
@@ -23,12 +23,12 @@ public interface UserMapper {
      * 查找所有用户
      * @return
      */
-    List<User> findAll();
+    List<UserVO> findAll();
 
     /**
      * queryUser
      */
-    List<User> queryUser(Map map);
+    List<UserVO> queryUser(Map map);
 
 
     int updateUsr(Map map);
@@ -36,12 +36,12 @@ public interface UserMapper {
     /**
      * 保存用户
      */
-    void saveUser(User user);
+    void saveUser(UserVO userVO);
 
     /**
      * 更新用户
      */
-    void updateUser(User user);
+    void updateUser(UserVO userVO);
 
     /**
      * 根据id删除用户
@@ -50,12 +50,12 @@ public interface UserMapper {
     /**
      * 根据id查询用户信息
      */
-    User findById(Integer userId);
+    UserVO findById(Integer userId);
 
     /**
      * 根据名称模糊查询用户信息
      */
-    List<User> findByName(String username);
+    List<UserVO> findByName(String username);
 
 
     /**
@@ -68,15 +68,15 @@ public interface UserMapper {
      * @param vo
      * @return
      */
-    List<User> findUserByVo(QueryVo vo);
+    List<UserVO> findUserByVo(QueryVo vo);
 
     /**
      * 分页
      */
-    List<User> getUserByLimit(Map<String, Integer> map);
+    List<UserVO> getUserByLimit(Map<String, Integer> map);
 
     /**
      * 分页2
      */
-    List<User> getUserByBounds();
+    List<UserVO> getUserByBounds();
 }
