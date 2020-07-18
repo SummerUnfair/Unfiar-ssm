@@ -5,30 +5,26 @@
 <%@ page import="java.util.HashMap" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <html>
 <head>
+    <link rel="stylesheet" href="\css\common.css" />
+    <link rel="stylesheet" href="\css\success.css" />
     <title>欢迎回家</title>
 </head>
 <body>
-
-<h3>ヽ(✿ﾟ▽ﾟ)ノ 欢迎回家</h3>
-
-<a href="/unfairHome/JsonStyle" target="_self">
-    <input type="button" name="unfairButton" value="Json是这个样子的" />
-</a>
-
+<h3 class="subTitle">ヽ(✿ﾟ▽ﾟ)ノ 欢迎回家</h3>
 <h4>全员信息</h4>
-
-<c:forEach items="${userVO}" var="userMessage" >
-    ${userMessage.id}
-    ${userMessage.username}
-    ${userMessage.create_time}
-    ${userMessage.update_time}<br>
-</c:forEach>
-<h4>日期时间</h4>
-<%
-    request.setAttribute("number",3);
-%>
+<p>
+    <c:forEach items="${userVO}" var="userMessage" >
+        ${userMessage.id}
+        ${userMessage.username}
+        <fmt:formatDate value="${userMessage.create_time}" type="date" pattern="yyyy年MM月dd日 HH点mm分ss秒"/>
+        <fmt:formatDate value="${userMessage.update_time}" type="date" pattern="yyyy年MM月dd日 HH点mm分ss秒"/>
+        <br>
+    </c:forEach>
+</p>
+    <h4>日期时间</h4>
 <c:choose>
     <c:when test="${weekNumber==1}">星期一</c:when>
     <c:when test="${weekNumber==2}">星期二</c:when>
@@ -40,7 +36,9 @@
     <c:otherwise>数字有误</c:otherwise>
 </c:choose>
 <br>
-
+<a href="/unfairHome/JsonStyle" target="_self">
+    <input type="button" name="unfairButton" value="Json是这个样子的" />
+</a>
 <%
     List list= new ArrayList<>();
     list.add("111");

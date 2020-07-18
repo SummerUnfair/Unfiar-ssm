@@ -11,5 +11,9 @@ success
 <c:forEach begin="1" end="10" var="i" step="1">
     ${i}<br>
 </c:forEach>
+
+<%
+    request.setAttribute("number",3);
+%>
 </body>
 </html>

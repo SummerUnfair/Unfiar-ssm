@@ -10,6 +10,7 @@
 <head>
     <title>unfair-ssm</title>
     <script type="text/javascript" src="webjars/jquery/jquery.js" ></script>
+    <link rel="stylesheet" href="\css\common.css" />
     <script type="text/javascript">
         //alert('hello.world');
         console.log('ferao jsp 页面');
@@ -17,17 +18,16 @@
 </head>
 <body>
 
-<h3>unfair|首页</h3><hr/>
+<h3 class="subTitle">unfair|首页</h3><hr/>
 <%--请求参数绑定--%>
-<form action="/unfairHome/Login" method="post" >
-    用户登陆--><br/>
-    账号：<input type="text" name="username" /> <br/>
-    密码：<input type="text" name="password" /> <br/>
-    金额：<input type="text" name="money" /> <br/>
+<form action="/unfairHome/Login" method="post" class="subForm" >
+    用户登陆<br/>
+    <label for="username">账号：</label><input type="text" name="username" id="username" /> <br/>
+    <label for="password">密码：</label><input type="text" name="password" id="password" /> <br/>
+    <label for="retry">重置：</label><input type="text" name="retry" id="retry" /> <br/>
     <input type="submit" value="提交" />
-</form><hr/>
+</form>
 
 <%--<a href="hello">入门程序</a>--%>
-
 </body>
 </html>
