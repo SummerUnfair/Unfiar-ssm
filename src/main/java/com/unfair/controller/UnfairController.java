@@ -36,12 +36,17 @@ public class UnfairController {
      * function:RequestBody Test
      */
     @PostMapping("/Login")
-    public String login(@RequestBody String body,Model model){
+    public String login(@RequestBody String body){
         LOGGER.info("@RequestBody返回内容:"+StringUtils.removeSign(StringUtils.toLowerCase(body)));
+        return  "redirect:SubLogin";
+    }
+
+    @RequestMapping(value = "/SubLogin")
+    public String json1(Model model){
         List<UserVO> userVO = userService.findAll();
         model.addAttribute("userVO", userVO);
         model.addAttribute("weekNumber", TimeUtils.get_Now_Week_Number()-1);
-        return  "success";
+        return "success";
     }
 
     /**
@@ -76,19 +81,6 @@ public class UnfairController {
         return realPath+"测试";
     }
 
-    @RequestMapping(value = "/json1")
-    @ResponseBody
-    public String json1() throws JsonProcessingException {
-        //创建一个jackson的对象映射器，用来解析数据
-        ObjectMapper mapper = new ObjectMapper();
-        //创建一个对象
-//        UserVO userVO = new UserVO(1, "男");
-//        //将我们的对象解析成为json格式
-//        String str = mapper.writeValueAsString(userVO);
-//        System.out.println(str);
-        return null;
-    }
-
     /**
      * RequestParam 测试
      * @param name
@@ -107,6 +99,13 @@ public class UnfairController {
      */
     @RequestMapping(value="/sayHello",params = {"username=heihei"},method = {RequestMethod.GET},headers = {"Accept"})
     public String sayHello(){
+        //创建一个jackson的对象映射器，用来解析数据
+        ObjectMapper mapper = new ObjectMapper();
+        //创建一个对象
+//        UserVO userVO = new UserVO(1, "男");
+//        //将我们的对象解析成为json格式
+//        String str = mapper.writeValueAsString(userVO);
+//        System.out.println(str);
         System.out.println("success");
         return "sayHellosuccess" ;
     }
