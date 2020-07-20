@@ -1,8 +1,7 @@
 package com.unfair.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
+import com.unfair.api.dto.UserDTO;
 import com.unfair.api.vo.UserVO;
 import com.unfair.service.UserService;
 import com.unfair.utils.StringUtils;
@@ -14,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.HashMap;
@@ -24,7 +24,7 @@ import java.util.Map;
 @RequestMapping("/unfairHome")
 public class UnfairController {
 
-    @Autowired
+    @Resource
     private UserService userService;
 
     private static Log LOGGER = LogFactory.getLog(UnfairController.class);
@@ -43,7 +43,7 @@ public class UnfairController {
 
     @RequestMapping(value = "/SubLogin")
     public String json1(Model model){
-        List<UserVO> userVO = userService.findAll();
+        List<UserVO> userVO = userService.findAll(new UserDTO());
         model.addAttribute("userVO", userVO);
         model.addAttribute("weekNumber", TimeUtils.get_Now_Week_Number()-1);
         return "success";

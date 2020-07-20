@@ -19,8 +19,10 @@
     <c:forEach items="${userVO}" var="userMessage" >
         ${userMessage.id}
         ${userMessage.username}
-        <fmt:formatDate value="${userMessage.create_time}" type="date" pattern="yyyy年MM月dd日 HH点mm分ss秒"/>
-        <fmt:formatDate value="${userMessage.update_time}" type="date" pattern="yyyy年MM月dd日 HH点mm分ss秒"/>
+        ${userMessage.sex}
+        ${userMessage.address}
+        <fmt:formatDate value="${userMessage.createTime}" type="date" pattern="yyyy年MM月dd日 HH点mm分ss秒"/>
+        <fmt:formatDate value="${userMessage.updateTime}" type="date" pattern="yyyy年MM月dd日 HH点mm分ss秒"/>
         <br>
     </c:forEach>
 </p>

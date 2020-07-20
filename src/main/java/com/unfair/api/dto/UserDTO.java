@@ -1,18 +1,22 @@
-package com.unfair.api.vo;
+package com.unfair.api.dto;/*
+ * @author Ferao
+ * @date
+ * @discription
+ */
 
 import com.alibaba.fastjson.annotation.JSONField;
+import com.unfair.api.vo.UserVO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.apache.ibatis.type.Alias;
+
 import java.util.Date;
 import java.util.Objects;
 
-@Alias("user")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserVO implements  Comparable<UserVO> {
+public class UserDTO implements  Comparable<UserDTO>  {
 
     @JSONField(name = "id")
     private Integer id;
@@ -31,8 +35,8 @@ public class UserVO implements  Comparable<UserVO> {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        UserVO userVO = (UserVO) o;
-        return id == userVO.id && Objects.equals(username, userVO.username);
+        UserDTO userDTO = (UserDTO) o;
+        return id == userDTO.id && Objects.equals(username, userDTO.username);
     }
 
     @Override
@@ -42,7 +46,7 @@ public class UserVO implements  Comparable<UserVO> {
 
     //重写排序的规则
     @Override
-    public int compareTo(UserVO o) {
+    public int compareTo(UserDTO o) {
         //return 0;  //认为元素都是相同的
         //自定义比较的规则，比较两个人的年龄（this,参数User）
         //return o.getId() - this.getId();   //年龄降序

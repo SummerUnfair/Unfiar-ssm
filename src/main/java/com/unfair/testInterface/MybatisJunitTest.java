@@ -1,6 +1,7 @@
 package com.unfair.testInterface;
 
 
+import com.unfair.api.dto.UserDTO;
 import com.unfair.mapper.UserMapper;
 import com.unfair.pojo.QueryVo;
 import com.unfair.api.vo.UserVO;
@@ -75,6 +76,20 @@ public class MybatisJunitTest {
         }
     }
 
+    /**
+     * 测试map操作
+     */
+    @Test
+    public void tablerunMethod(){
+
+        Map<String,Object> map = new HashMap<String,Object>();
+        map.put("table","usr");
+        map.put("username","丽丽");
+        List<UserVO> usr = mapper.findAllTable(map);
+        for (UserVO userVO : usr) {
+            System.out.println(userVO);
+        }
+    }
 
     /**
      * 测试map操作单行数据
@@ -97,8 +112,9 @@ public class MybatisJunitTest {
      */
     @Test
     public void findAllTest(){
-        List<UserVO> userVOS =mapper.findAll();
-        for (UserVO userVO : userVOS){
+        UserDTO userVO = new UserDTO();
+        List<UserVO> userVOS =mapper.findAll(userVO);
+        for (UserVO user : userVOS){
             System.out.println(userVO);
         }
     }

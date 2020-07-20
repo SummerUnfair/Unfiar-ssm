@@ -1,5 +1,6 @@
 package com.unfair.mapper;
 
+import com.unfair.api.dto.UserDTO;
 import com.unfair.pojo.QueryVo;
 import com.unfair.api.vo.UserVO;
 import org.springframework.stereotype.Component;
@@ -23,7 +24,7 @@ public interface UserMapper {
      * 查找所有用户
      * @return
      */
-    List<UserVO> findAll();
+    List<UserVO> findAll(UserDTO userDTO);
 
     /**
      * queryUser

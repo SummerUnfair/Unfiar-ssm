@@ -7,8 +7,10 @@
     <sql id="userColumns">
         id,
         username,
-        create_time,
-        update_time
+        sex,
+        address,
+        create_time as createTime,
+        update_time as updateTime
     </sql>
 
     <!--查询多条-->
@@ -17,6 +19,19 @@
       <if test="username !=null">
           and username= #{username}
       </if>
+    </select>
+
+    <!--根据名称模糊查询-->
+    <select id="findByAttr" parameterType="user" resultType="user">
+      select * from usr
+      <where>
+          <if test="username != null">
+              username like #{name}
+          </if>
+          <if test="id != null">
+              id = #{id}
+          </if>
+      </where>
     </select>
 
     <!--查询多行--><!--基本类型输入 map输出-->
@@ -39,10 +54,24 @@
     </update>
 
     <!--查询所有-->
-    <select id="findAll"  resultType="user">
+    <select id="findAll"  parameterType="userDTO" resultType="user">
       select
        <include refid="userColumns"/>
         from usr
+        <where>
+            <if test="id != null">
+                id = #{id}
+            </if>
+            <if test="username != null">
+                username like #{name}
+            </if>
+            <if test="sex != null">
+                sex = #{sex}
+            </if>
+            <if test="address != null">
+                address=#{address}
+            </if>
+        </where>
     </select>
 
     <!--queryUser-->
@@ -83,10 +112,7 @@
     <select id="findById" parameterType="int" resultType="com.unfair.api.vo.UserVO">
         select * from usr where id=#{uid}
     </select>
-    <!--根据名称模糊查询-->
-    <select id="findByName" parameterType="string" resultType="com.unfair.api.vo.UserVO">
-        select * from usr where username like #{name}
-    </select>
+
     <!--获取用户的总记录条数-->
     <select id="findTotal" resultType="int">
         select count(id) from usr;
