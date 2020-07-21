@@ -13,7 +13,7 @@ public class ServiceJunitTest {
     public static void main (String[] args)
     {
         ApplicationContext ac = new ClassPathXmlApplicationContext("spring-common.xml");
-        UserService user = (UserService) ac.getBean("userServiceimpl");
+        UserService user = (UserService) ac.getBean("userService");
         UserDTO userVO1 = new UserDTO();
         List<UserVO> all = user.findAll(userVO1);
         for (UserVO userVO : all) {
