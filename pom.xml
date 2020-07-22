@@ -57,10 +57,11 @@
       <artifactId>mysql-connector-java</artifactId>
       <version>${mysql.version}</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/com.alibaba/druid -->
     <dependency>
-      <groupId>c3p0</groupId>
-      <artifactId>c3p0</artifactId>
-      <version>0.9.1.2</version>
+      <groupId>com.alibaba</groupId>
+      <artifactId>druid</artifactId>
+      <version>1.1.10</version>
     </dependency>
     <!-- context -->
     <dependency>

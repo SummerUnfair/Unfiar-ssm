@@ -9,22 +9,28 @@
     http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <!-- 数据库连接池 -->
-    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
         <!-- 配置连接池属性 -->
-        <property name="driverClass" value="@[datasource.connection.driver]"/>
-        <property name="jdbcUrl" value="@[datasource.connection.url]"/>
-        <property name="user" value="@[datasource.connection.user]"/>
+        <property name="driverClassName" value="@[datasource.connection.driver]"/>
+        <property name="url" value="@[datasource.connection.url]"/>
+        <property name="username" value="@[datasource.connection.user]"/>
         <property name="password" value="@[datasource.connection.password]"/>
-
-        <!-- c3p0连接池的私有属性 -->
-        <property name="maxPoolSize" value="30" />
-        <property name="minPoolSize" value="10" />
-        <!-- 关闭连接后不自动commit -->
-        <property name="autoCommitOnClose" value="false" />
-        <!-- 获取连接超时时间 -->
-        <property name="checkoutTimeout" value="10000" />
-        <!-- 当获取连接失败重试次数 -->
-        <property name="acquireRetryAttempts" value="2" />
+        <!-- 初始化连接大小 -->
+        <property name="initialSize" value="@[druid.initialSize]" />
+        <!-- 连接池最大使用连接数量 -->
+        <property name="maxActive" value="@[druid.maxActive]" />
+        <!-- 连接池最大空闲 -->
+        <property name="maxIdle" value="@[druid.maxIdle]" />
+        <!-- 连接池最小空闲 -->
+        <property name="minIdle" value="@[druid.minIdle]" />
+        <!-- 获取连接最大等待时间 -->
+        <property name="maxWait" value="@[druid.maxWait]" />
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="@[druid.timeBetweenEvictionRunsMillis]" />
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="@[druid.minEvictableIdleTimeMillis]" />
+        <!-- 监控数据库 -->
+        <property name="filters" value="mergeStat" />
     </bean>
 
     <!-- 配置SqlSessionFactory对象 -->
