@@ -29,7 +29,7 @@ public class MybatisJunitTest {
     @Before
     public void init(){
         try {
-            inputStream = Resources.getResourceAsStream("mybatis/MybatisConfig.xml");
+            inputStream = Resources.getResourceAsStream("mybatis/MybatisConfig-01.xml");
             SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
             session = sqlSessionFactory.openSession();
             mapper = session.getMapper(UserMapper.class);
