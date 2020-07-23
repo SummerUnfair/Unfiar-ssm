@@ -10,7 +10,7 @@
     示例
         <configuration scan="true" scanPeriod="60 seconds" debug="false">
     -->
-<configuration scan="true" scanPeriod="60" debug="false">
+<configuration scan="true" scanPeriod="60 seconds" debug="false">
 
     <!--子节点contextName-->
         <!--
@@ -23,7 +23,7 @@
         name: 变量的名称
         value: 的值时变量定义的值
     -->
-    <property name="log_path" value="./logs" />
+    <property name="log_path" value="C:/data/unfair-ssm/logs" />
     <!-- 日志最大的历史 30天 -->
     <property name="maxHistory" value="30"/>
     <!--子节点appender-->
@@ -61,20 +61,24 @@
             <!--<pattern>%d %p (%file:%line\)- %m%n</pattern>-->
             <!--格式化输出：%d:表示日期    %thread:表示线程名     %-5level:级别从左显示5个字符宽度  %msg:日志消息    %n:是换行符-->
             <pattern>控制台-%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger - %msg%n</pattern>
-            <charset>UTF-8</charset>
+            <charset>GBK</charset>
         </encoder>
     </appender>
 
     <!--输出到文件-->
     <appender name="fileInfoLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--被写入的文件名，可以是相对目录，也可以是绝对目录，如果上级目录不存在会自动创建，没有默认值。-->
+        <file>C:\Users\92897\IdeaProjects\FeraoTest\Unfiar-ssm\logs\unfair-all.log</file>
+        <!--<append>：如果是 true，日志被追加到文件结尾，如果是 false，清空现存文件，默认是true-->
+        <append>true</append>
         <!--根据级别过滤掉匹配的日志，不输出error级别的日志-->
         <filter class="ch.qos.logback.classic.filter.LevelFilter">
             <level>ERROR</level>
             <!--匹配上ERROR级别的日志信息，则不会输出到该文件中-->
             <onMatch>DENY</onMatch>
-            <!--匹配不上ERROR级别的日志信息，则输出到该文件中-->
+            <!--匹配不上ERROR级别的日志信息，则输出到该文件中DENY-->
             <onMismatch>ACCEPT</onMismatch>
-            <!--这样过滤以后，该文件中只会输出info级别的日志信息-->
+            <!--这样过滤以后，该文件中只会输出info级别的日志信息ACCEPT-->
         </filter>
         <encoder>
             <!--格式化输出：%d:表示日期    %thread:表示线程名     %-5level:级别从左显示5个字符宽度  %msg:日志消息    %n:是换行符-->
@@ -82,8 +86,14 @@
             <!--<charset>UTF-8</charset>-->
         </encoder>
         <!--滚动策略，按时间每天生成一个日志文件-->
+        <!--<rollingPolicy>:当发生滚动时，决定RollingFileAppender的行为，涉及文件移动和重命名。属性class定义具体的滚动策略类-->
+        <!--TimeBaseRollingPolicy ：最常用的滚动策略，根据时间来制定滚动策略，即负责滚动也负责触发滚动。有如下节点-->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!--文件路径-->
+            <!--
+                在输出日志文件的时候，这里使用的配置变量，在打包成war的时候，如果使用绝对路径的话，日志会直接输出
+                如果使用的是相对路径的话，当部署到tomcat路径下的时候，默认是输出到tomcat的bin目录下的，如/log，就会输出到bin/log目录下
+            -->
             <fileNamePattern>${log_path}/logback-%d{yyyy-MM-dd}.log</fileNamePattern>
             <maxHistory>${maxHistory}</maxHistory>
             <totalSizeCap>1GB</totalSizeCap>
@@ -91,6 +101,7 @@
     </appender>
     <!--配置error信息输出到一个文件-->
     <appender name="fileErrorLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>C:\Users\92897\IdeaProjects\FeraoTest\Unfiar-ssm\logs\unfair-error.log</file>
         <!--根据范围过滤日志，只输出error级别的日志-->
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>ERROR</level>
@@ -102,7 +113,7 @@
         <!--滚动策略，按时间每天生成一个日志文件-->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!--文件路径-->
-            <fileNamePattern>${log_path}/logback.%d{yyyy-MM-dd}.error.%d.log</fileNamePattern>
+            <fileNamePattern>${log_path}/logback.%d{yyyy-MM-dd}.error.log</fileNamePattern>
             <maxHistory>${maxHistory}</maxHistory>
             <totalSizeCap>1GB</totalSizeCap>
         </rollingPolicy>
@@ -118,7 +129,7 @@
     <!--<logger name="com.unfair.mapper" level="debug" additivity="false">-->
         <!--<appender-ref ref="console"/>-->
     <!--</logger>-->
-
+    <!--标识这个appender将会添加到这个loger。-->
     <!--子节点:root-->
     <!--
         root节点是必选节点，用来指定最基础的日志输出级别，只有一个level属性，用来设置打印级别，大小写无关：

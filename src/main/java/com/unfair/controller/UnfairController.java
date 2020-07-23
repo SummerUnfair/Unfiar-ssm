@@ -4,10 +4,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.unfair.api.dto.UserDTO;
 import com.unfair.api.vo.UserVO;
 import com.unfair.service.UserService;
+import com.unfair.testInterface.ServiceJunitTest;
+import com.unfair.utils.JacksonUtils;
 import com.unfair.utils.StringUtils;
 import com.unfair.utils.TimeUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,7 +31,7 @@ public class UnfairController {
     @Resource
     private UserService userService;
 
-    private static Log LOGGER = LogFactory.getLog(UnfairController.class);
+    private static Logger LOGGER = LoggerFactory.getLogger(UnfairController.class);
 
     /**
      * RequestBody测试
@@ -37,13 +41,14 @@ public class UnfairController {
      */
     @PostMapping("/Login")
     public String login(@RequestBody String body){
-        LOGGER.info("@RequestBody返回内容:"+StringUtils.removeSign(StringUtils.toLowerCase(body)));
+        LOGGER.info("登录信息:[{}]",StringUtils.removeSign(StringUtils.toLowerCase(body)));
         return  "redirect:SubLogin";
     }
 
     @RequestMapping(value = "/SubLogin")
     public String json1(Model model){
         List<UserVO> userVO = userService.findAll(new UserDTO());
+        LOGGER.info("查询服务结束,共[{}]条用户信息",userVO.size());
         model.addAttribute("userVO", userVO);
         model.addAttribute("weekNumber", TimeUtils.get_Now_Week_Number()-1);
         return "success";
@@ -60,6 +65,7 @@ public class UnfairController {
         resultMap.put("titile", "主题");
         resultMap.put("message", "展示简单得Json格式");
         resultMap.put("status", "success");
+        LOGGER.info("JsonStyle 转换内容:[{}]",JacksonUtils.ObjcetToJsonString(resultMap));
         return resultMap;
     }
 
@@ -99,14 +105,6 @@ public class UnfairController {
      */
     @RequestMapping(value="/sayHello",params = {"username=heihei"},method = {RequestMethod.GET},headers = {"Accept"})
     public String sayHello(){
-        //创建一个jackson的对象映射器，用来解析数据
-        ObjectMapper mapper = new ObjectMapper();
-        //创建一个对象
-//        UserVO userVO = new UserVO(1, "男");
-//        //将我们的对象解析成为json格式
-//        String str = mapper.writeValueAsString(userVO);
-//        System.out.println(str);
-        System.out.println("success");
         return "sayHellosuccess" ;
     }
 
