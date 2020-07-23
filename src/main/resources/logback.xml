@@ -23,12 +23,12 @@
         name: 变量的名称
         value: 的值时变量定义的值
     -->
-    <property name="log.path" value="D:\\SpringbootTesk\\BootProTest\\logback.log" />
+    <property name="log_path" value="./logs" />
     <!-- 日志最大的历史 30天 -->
     <property name="maxHistory" value="30"/>
     <!--子节点appender-->
     <!--
-        负责写日志的组件，它有两个必要属性name和class。
+        负责写日志的组件，它有两个必要属性name和class。class用来指定哪种输出策略，常用就是控制台输出策略和文件输出策略。
         name指定appender名称，
         class指定appender的全限定名
 
@@ -53,6 +53,7 @@
             请注意除“％d”之外的“％i”转换标记。％i和％d令牌都是强制性的。每当当前日志文件在当前时间段结束之前达到maxFileSize时，它将以增加的索引存档，从0开始。
     -->
     <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <!--根据范围过滤日志，只输出INFO级别的日志-->
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>INFO</level>
         </filter>
@@ -60,23 +61,51 @@
             <!--<pattern>%d %p (%file:%line\)- %m%n</pattern>-->
             <!--格式化输出：%d:表示日期    %thread:表示线程名     %-5level:级别从左显示5个字符宽度  %msg:日志消息    %n:是换行符-->
             <pattern>控制台-%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger - %msg%n</pattern>
-            <charset>GBK</charset>
+            <charset>UTF-8</charset>
         </encoder>
     </appender>
 
     <!--输出到文件-->
-    <appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.path}</file>
-        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>logback.%d{yyyy-MM-dd}.log</fileNamePattern>
-            <maxHistory>30</maxHistory>
-            <totalSizeCap>1GB</totalSizeCap>
-        </rollingPolicy>
+    <appender name="fileInfoLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--根据级别过滤掉匹配的日志，不输出error级别的日志-->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <!--匹配上ERROR级别的日志信息，则不会输出到该文件中-->
+            <onMatch>DENY</onMatch>
+            <!--匹配不上ERROR级别的日志信息，则输出到该文件中-->
+            <onMismatch>ACCEPT</onMismatch>
+            <!--这样过滤以后，该文件中只会输出info级别的日志信息-->
+        </filter>
         <encoder>
             <!--格式化输出：%d:表示日期    %thread:表示线程名     %-5level:级别从左显示5个字符宽度  %msg:日志消息    %n:是换行符-->
             <pattern>文件记录-%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
             <!--<charset>UTF-8</charset>-->
         </encoder>
+        <!--滚动策略，按时间每天生成一个日志文件-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--文件路径-->
+            <fileNamePattern>${log_path}/logback-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>${maxHistory}</maxHistory>
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
+    </appender>
+    <!--配置error信息输出到一个文件-->
+    <appender name="fileErrorLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--根据范围过滤日志，只输出error级别的日志-->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+        <!--日志输出格式-->
+        <encoder>
+            <pattern>文件记录-%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+        <!--滚动策略，按时间每天生成一个日志文件-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--文件路径-->
+            <fileNamePattern>${log_path}/logback.%d{yyyy-MM-dd}.error.%d.log</fileNamePattern>
+            <maxHistory>${maxHistory}</maxHistory>
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
     </appender>
 
     <!--子节点:logger-->
@@ -95,10 +124,12 @@
         root节点是必选节点，用来指定最基础的日志输出级别，只有一个level属性，用来设置打印级别，大小写无关：
         TRACE, DEBUG, INFO, WARN, ERROR, ALL 和 OFF，不能设置为INHERITED或者同义词NULL。默认是DEBUG。
         可以包含零个或多个元素，标识这个appender将会添加到这个logger。
+        通过appender-ref关联前面指定项的日志输出级别
     -->
     <root level="INFO">
         <appender-ref ref="console" />
-        <appender-ref ref="file" />
+        <appender-ref ref="fileInfoLog" />
+        <appender-ref ref="fileErrorLog" />
     </root>
 
 </configuration>
