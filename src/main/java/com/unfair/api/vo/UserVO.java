@@ -12,10 +12,10 @@ import java.util.Objects;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserVO implements  Comparable<UserVO> {
+public class UserVO {
 
     @JSONField(name = "id")
-    private Integer id;
+    private String id;
     @JSONField(name = "username")
     private String username;
     @JSONField(name = "sex")
@@ -38,14 +38,5 @@ public class UserVO implements  Comparable<UserVO> {
     @Override
     public int hashCode() {
         return Objects.hash(id, username);
-    }
-
-    //重写排序的规则
-    @Override
-    public int compareTo(UserVO o) {
-        //return 0;  //认为元素都是相同的
-        //自定义比较的规则，比较两个人的年龄（this,参数User）
-        //return o.getId() - this.getId();   //年龄降序
-        return this.getId() - o.getId();     //年龄升序
     }
 }

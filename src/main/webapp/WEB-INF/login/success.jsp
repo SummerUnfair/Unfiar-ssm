@@ -61,7 +61,7 @@
 <%
     UserVO userVO = new UserVO();
     userVO.setUsername("ferao");
-    userVO.setId(2);
+    userVO.setId("123");
     request.setAttribute("u", userVO);
 
     List lists = new ArrayList<>();
