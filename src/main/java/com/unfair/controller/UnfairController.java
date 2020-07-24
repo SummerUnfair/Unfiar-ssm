@@ -36,7 +36,7 @@ public class UnfairController {
      */
     @PostMapping("/Login")
     public String login(@RequestBody String body){
-        LOGGER.info("登录信息:[{}]",StringUtils.removeSign(StringUtils.toLowerCase(body)));
+        LOGGER.info("用户[{}]登录",StringUtils.removeSign(StringUtils.toLowerCase(body)));
         return  "redirect:SubLogin";
     }
 
