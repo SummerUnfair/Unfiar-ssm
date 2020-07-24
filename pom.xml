@@ -40,6 +40,8 @@
     <webjars.jquery.version>3.4.1</webjars.jquery.version>
     <fastjson.version>1.2.54</fastjson.version>
     <pagehelper.version>4.0.0</pagehelper.version>
+    <aspectjweaver.version>1.9.4</aspectjweaver.version>
+    <jstl.version>1.2</jstl.version>
   </properties>
 
   <dependencies>
@@ -102,7 +104,7 @@
     <dependency>
       <groupId>org.aspectj</groupId>
       <artifactId>aspectjweaver</artifactId>
-      <version>1.9.4</version>
+      <version>${aspectjweaver.version}</version>
     </dependency>
     <dependency>
       <groupId>org.springframework</groupId>
@@ -152,19 +154,13 @@
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>jstl</artifactId>
-      <version>1.2</version>
+      <version>${jstl.version}</version>
     </dependency>
     <!--standard标签库-->
     <dependency>
       <groupId>taglibs</groupId>
       <artifactId>standard</artifactId>
       <version>1.1.2</version>
-    </dependency>
-    <!-- fastjson -->
-    <dependency>
-      <groupId>com.alibaba</groupId>
-      <artifactId>fastjson</artifactId>
-      <version>1.2.47</version>
     </dependency>
     <!--<dependency>-->
       <!--<groupId>com.fasterxml.jackson.core</groupId>-->

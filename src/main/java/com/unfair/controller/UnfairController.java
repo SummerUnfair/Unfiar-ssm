@@ -7,6 +7,7 @@ import com.unfair.service.UserService;
 import com.unfair.utils.JacksonUtils;
 import com.unfair.utils.StringUtils;
 import com.unfair.utils.TimeUtils;
+import org.springframework.util.Assert;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -36,6 +37,8 @@ public class UnfairController {
      */
     @PostMapping("/Login")
     public String login(@RequestBody String body){
+        //切换requestbody使用方式时启用
+        Assert.notNull(body,"用户信息不能为空");
         LOGGER.info("用户[{}]登录",StringUtils.removeSign(StringUtils.toLowerCase(body)));
         return  "redirect:SubLogin";
     }

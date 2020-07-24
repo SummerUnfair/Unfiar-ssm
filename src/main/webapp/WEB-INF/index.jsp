@@ -27,7 +27,7 @@
     <label for="retry">重置：</label><input type="text" name="retry" id="retry" /> <br/>
     <input type="submit" value="提交" />
 </form>
-
+<br/><a href="https://blog.csdn.net/qq_21561501" target="_self"><br/>&copy;版权所有ferao</a>
 <%--<a href="hello">入门程序</a>--%>
 </body>
 </html>

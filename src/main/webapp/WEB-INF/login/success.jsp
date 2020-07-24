@@ -89,7 +89,7 @@ ${sessionScope.age}
 
 <%!
     static{
-        System.out.println("Loading Ferao");
+        System.out.println("");
     }
 %>
 

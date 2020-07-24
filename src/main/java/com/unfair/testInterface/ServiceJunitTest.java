@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.util.Assert;
 
 import java.util.List;
 
@@ -29,5 +30,12 @@ public class ServiceJunitTest {
         for (UserVO userVO : all) {
             System.out.println(userVO);
         }
+    }
+
+    @Test
+    public void assertTest(){
+        String location = null;
+        Assert.notNull(location, "Location must not be null");
+        System.out.println("location = [" + location + "]");
     }
 }
