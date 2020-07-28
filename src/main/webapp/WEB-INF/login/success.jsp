@@ -14,19 +14,22 @@
 </head>
 <body>
 <h3 class="subTitle">ヽ(✿ﾟ▽ﾟ)ノ 欢迎回家</h3>
-<h4>全员信息</h4>
-<p>
+<h4 class="subH4"><a href="#">全员信息</a></h4>
+<div class="tableStyle">
+<table>
     <c:forEach items="${userVO}" var="userMessage" >
-        ${userMessage.id}
-        ${userMessage.username}
-        ${userMessage.sex}
-        ${userMessage.address}
-        <fmt:formatDate value="${userMessage.createTime}" type="date" pattern="yyyy年MM月dd日 HH点mm分ss秒"/>
-        <fmt:formatDate value="${userMessage.updateTime}" type="date" pattern="yyyy年MM月dd日 HH点mm分ss秒"/>
-        <br>
+    <tr>
+        <td>${userMessage.id}</td>
+        <td>${userMessage.username}</td>
+        <td>${userMessage.sex}</td>
+        <td>${userMessage.address}</td>
+        <td><fmt:formatDate value="${userMessage.createTime}" type="date" pattern="yyyy年MM月dd日 HH点mm分ss秒"/></td>
+        <td><fmt:formatDate value="${userMessage.updateTime}" type="date" pattern="yyyy年MM月dd日 HH点mm分ss秒"/></td>
+    </tr>
     </c:forEach>
-</p>
-    <h4>日期时间</h4>
+</table>
+</div>
+<h4 class="subH4"><a href="#">日期时间</a></h4>
 <c:choose>
     <c:when test="${weekNumber==1}">星期一</c:when>
     <c:when test="${weekNumber==2}">星期二</c:when>

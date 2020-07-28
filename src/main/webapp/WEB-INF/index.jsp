@@ -22,9 +22,10 @@
 <%--请求参数绑定--%>
 <form action="/unfairHome/Login" method="post" class="subForm" >
     用户登陆<br/>
-    <label for="username">账号：</label><input type="text" name="username" id="username" /> <br/>
-    <label for="password">密码：</label><input type="text" name="password" id="password" /> <br/>
-    <label for="retry">重置：</label><input type="text" name="retry" id="retry" /> <br/>
+    <label for="username">账号：</label><input type="text" name="username" id="username"  placeholder="最长六位数字" size="20" maxlength="6" /> <br/>
+    <label for="password">密码：</label><input type="text" name="password" id="password" placeholder="最长六位数字" size="20" maxlength="6" /> <br/>
+    <label for="retry">重置：</label><input type="text" name="retry" id="retry" placeholder="最长六位数字" size="20" maxlength="6" /> <br/>
+    <input type="reset" value="清空" />
     <input type="submit" value="提交" />
 </form>
 <br/><a href="https://blog.csdn.net/qq_21561501" target="_self"><br/>&copy;版权所有ferao</a>

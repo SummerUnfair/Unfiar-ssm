@@ -1,3 +1,4 @@
+/*通用页面标题*/
 .subTitle{
     font-family: 幼圆;
     font-size: 20px;
@@ -6,6 +7,7 @@
     text-align: center;
     line-height: 50px;
 }
+/*通用登录表单样式*/
 .subForm{
     font-family: 隶书;
     font-size: 20px;
@@ -13,4 +15,17 @@
     color: lightslategrey;
     text-align: center;
     line-height: 50px;
+}
+/*通用导航栏: 超链接引用系列*/
+a{
+    text-decoration: none;
+    color: #000000;
+    text-shadow: wheat 5px -5px 1px;
+}
+a:hover{
+    color: deeppink;
+    text-decoration: underline;
+}
+a:active{
+    color: blueviolet;
 }
