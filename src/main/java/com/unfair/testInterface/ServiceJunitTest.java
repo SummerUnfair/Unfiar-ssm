@@ -4,6 +4,13 @@ import com.unfair.api.dto.UserDTO;
 import com.unfair.api.vo.UserVO;
 import com.unfair.service.UserService;
 import com.unfair.service.RedisService;
+import org.apache.rocketmq.client.exception.MQBrokerException;
+import org.apache.rocketmq.client.exception.MQClientException;
+import org.apache.rocketmq.client.producer.DefaultMQProducer;
+import org.apache.rocketmq.client.producer.SendResult;
+import org.apache.rocketmq.common.message.Message;
+import org.apache.rocketmq.remoting.common.RemotingHelper;
+import org.apache.rocketmq.remoting.exception.RemotingException;
 import org.junit.Before;
 import org.junit.Test;
 import org.slf4j.Logger;
@@ -12,17 +19,22 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.util.Assert;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 public class ServiceJunitTest {
 
     private static Logger LOGGER = LoggerFactory.getLogger(ServiceJunitTest.class);
-    ApplicationContext ac =null;
+    private static  ApplicationContext ac = new ClassPathXmlApplicationContext("spring-common.xml");
     RedisService redisService= null;
+
+    private static DefaultMQProducer defaultMQProducer= (DefaultMQProducer)ac.getBean("defaultMQProducer");
+
     @Before
     public void before(){
         ac = new ClassPathXmlApplicationContext("spring-common.xml");
         redisService = (RedisService) ac.getBean("redisService");
+        defaultMQProducer=(DefaultMQProducer)ac.getBean("defaultMQProducer");
     }
 
     /**
@@ -52,7 +64,33 @@ public class ServiceJunitTest {
     }
 
     @Test
-    public void redisTemTest(){
-        redisService.set("unfair","unfair");
+    public void rocketTemTest() throws MQClientException, UnsupportedEncodingException, RemotingException, InterruptedException, MQBrokerException {
+        defaultMQProducer.start();
+        for (int i = 0; i < 100; i++) {
+            // Create a message instance, specifying topic, tag and message body.
+            Message msg = new Message("TopicTest" /* Topic */,
+                    "TagA" /* Tag */,
+                    ("ferao 帅").getBytes(RemotingHelper.DEFAULT_CHARSET) /* Message body */
+            );
+            // Call send message to deliver message to one of brokers.
+            SendResult sendResult = defaultMQProducer.send(msg);
+            System.out.printf("%s%n", sendResult);
+        }
+        defaultMQProducer.shutdown();
     }
+
+    public static void main (String[] args) throws MQClientException, UnsupportedEncodingException, RemotingException, InterruptedException, MQBrokerException {
+        for (int i = 0; i < 100; i++) {
+            // Create a message instance, specifying topic, tag and message body.
+            Message msg = new Message("TopicTest" /* Topic */,
+                    "TagA" /* Tag */,
+                    ("ferao 帅").getBytes(RemotingHelper.DEFAULT_CHARSET) /* Message body */
+            );
+            // Call send message to deliver message to one of brokers.
+            SendResult sendResult = defaultMQProducer.send(msg);
+            System.out.printf("%s%n", sendResult);
+        }
+        //defaultMQProducer.shutdown();
+    }
+
 }

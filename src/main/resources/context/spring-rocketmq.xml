@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- 消息生产者配置   -->
+    <bean id="defaultMQProducer" class="org.apache.rocketmq.client.producer.DefaultMQProducer" init-method="start" destroy-method="shutdown">
+        <property name="producerGroup" value="please_rename_unique_group_name"/>
+        <property name="namesrvAddr" value="192.168.33.100:9876"/>
+        <property name="vipChannelEnabled" value="false"/>
+        <property name="retryTimesWhenSendFailed" value="3"/>
+    </bean>
+    <!-- 批量扣款消费者 -->
+    <bean id="rocketTest" class="org.apache.rocketmq.client.consumer.DefaultMQPushConsumer" init-method="start" destroy-method="shutdown">
+        <property name="namesrvAddr" value="192.168.33.100:9876"/>
+        <property name="consumerGroup" value="please_rename_unique_group_name"/>
+        <property name="consumeFromWhere" value="CONSUME_FROM_FIRST_OFFSET"/>
+        <property name="messageListener" ref="userMessageListener"/>
+        <property name="subscription">
+            <map>   <!-- 左边的是主题,右边的是tags -->
+                <entry key="TopicTest" value="*"/>
+            </map>
+        </property>
+    </bean>
+</beans>

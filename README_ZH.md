@@ -2,8 +2,10 @@
 
 后端:
     1.集成redis
-    2.redis整合spring
+    2.spring整合redis
     3.增加redis工具类
+    4.集成rokcetmq
+    5.spring整合rocketmq
 
 ###新增内容2020/7/28
 
