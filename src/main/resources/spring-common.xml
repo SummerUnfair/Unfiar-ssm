@@ -28,4 +28,7 @@
 
     <!--datasouce-->
     <import resource="classpath:/context/spring-datasource.xml"/>
+
+    <!--redis-->
+    <import resource="classpath:/context/spring-redis.xml"/>
 </beans>

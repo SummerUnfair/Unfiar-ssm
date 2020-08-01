@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- 配置连接工厂 -->
+    <bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+        <!-- 配置ip -->
+        <property name="hostName" value="127.0.0.1"></property>
+        <!-- 配置port -->
+        <property name="port" value="6379"></property>
+        <!-- 配置密码 -->
+        <property name="password" value="123456"></property>
+        <!-- 是否使用连接池-->
+        <property name="usePool" value="true"/>
+        <!-- 配置redis连接池-->
+        <property name="poolConfig" ref="poolConfig"></property>
+    </bean>
+
+    <!-- 连接池配置 -->
+    <bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <!--最大空闲数-->
+        <property name="maxIdle" value="50"></property>
+        <!--连接池的最大数据库连接数  -->
+        <property name="maxTotal" value="100"></property>
+        <!--最大建立连接等待时间-->
+        <property name="maxWaitMillis" value="20000"></property>
+        <!--逐出连接的最小空闲时间 默认1800000毫秒(30分钟)-->
+        <property name="minEvictableIdleTimeMillis" value="300000" />
+        <!--每次逐出检查时 逐出的最大数目 如果为负数就是 : 1/abs(n), 默认3-->
+        <property name="numTestsPerEvictionRun" value="1024" />
+        <!--逐出扫描的时间间隔(毫秒) 如果为负数,则不运行逐出线程, 默认-1-->
+        <property name="timeBetweenEvictionRunsMillis" value="30000" />
+        <!--是否在从池中取出连接前进行检验,如果检验失败,则从池中去除连接并尝试取出另一个-->
+        <property name="testOnBorrow" value="true" />
+        <!--在空闲时检查有效性, 默认false  -->
+        <property name="testWhileIdle" value="true" />
+    </bean>
+
+    <!-- 配置 key 和 value 的序列化器 -->
+    <bean id="stringRedisSerializer" class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+
+    <!-- 配置Redis模板对象 -->
+    <bean id="stringRedisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">
+        <property name="connectionFactory" ref="connectionFactory"></property>
+        <property name="keySerializer" ref="stringRedisSerializer"></property>
+        <property name="valueSerializer" ref="stringRedisSerializer"></property>
+        <property name="hashKeySerializer" ref="stringRedisSerializer" />
+        <property name="hashValueSerializer" ref="stringRedisSerializer" />
+    </bean>
+</beans>

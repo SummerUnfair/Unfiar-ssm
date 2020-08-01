@@ -1,11 +1,10 @@
-package com.unfair.api.dto;/*
+package com.unfair.api.dto;
+/*
  * @author Ferao
  * @date
  * @discription
  */
-
 import com.alibaba.fastjson.annotation.JSONField;
-import com.unfair.api.vo.UserVO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
