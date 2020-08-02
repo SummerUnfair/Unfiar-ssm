@@ -22,7 +22,7 @@
     </select>
 
     <!--根据名称模糊查询-->
-    <select id="findByAttr" parameterType="user" resultType="user">
+    <select id="findByName" parameterType="user" resultType="user">
       select * from usr
       <where>
           <if test="username != null">

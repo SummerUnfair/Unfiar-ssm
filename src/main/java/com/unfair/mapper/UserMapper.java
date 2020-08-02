@@ -58,7 +58,6 @@ public interface UserMapper {
      */
     List<UserVO> findByName(String username);
 
-
     /**
      * 查询总用户数
      */
