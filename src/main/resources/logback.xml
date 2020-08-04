@@ -96,7 +96,7 @@
         <encoder>
             <!--格式化输出：%d:表示日期    %thread:表示线程名     %-5level:级别从左显示5个字符宽度  %msg:日志消息    %n:是换行符-->
             <pattern>文件记录-%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
-            <!--<charset>UTF-8</charset>-->
+            <charset>UTF-8</charset>
         </encoder>
         <!--滚动策略，按时间每天生成一个日志文件-->
         <!--<rollingPolicy>:当发生滚动时，决定RollingFileAppender的行为，涉及文件移动和重命名。属性class定义具体的滚动策略类-->
@@ -151,7 +151,6 @@
         通过appender-ref关联前面指定项的日志输出级别
     -->
     <root level="INFO">
-        <!--<appender-ref ref="console_Test" />-->
         <appender-ref ref="console_Tomcat" />
         <appender-ref ref="fileInfoLog" />
         <appender-ref ref="fileErrorLog" />

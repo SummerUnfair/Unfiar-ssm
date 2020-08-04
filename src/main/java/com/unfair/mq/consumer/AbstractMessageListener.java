@@ -4,7 +4,6 @@ package com.unfair.mq.consumer;
  * @date
  * @discription
  */
-
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
 import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
@@ -26,26 +25,22 @@ public abstract class AbstractMessageListener implements MessageListenerConcurre
                     messageExt.getTags(),
                     messageExt.getKeys(),
                     messageExt.getMsgId());
-
             try {
+                logger.info("业务处理开始");
                 businessProcess(messageExt);
                 logger.info("消费结果 : {}", "success");
             } catch (Exception e) {
-                logger.error("消息处理异常。topic:{},tags:{},KEY:{},ID:{}",
+                logger.error("消息处理异常 : topic:{},tags:{},KEY:{},ID:{}",
                         messageExt.getTopic(),
                         messageExt.getTags(),
                         messageExt.getKeys(),
                         messageExt.getMsgId(),
                         e);
                 e.printStackTrace();
-            }finally {
-
             }
         }
-
-        return null;
+        return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
     }
-
     protected abstract void businessProcess(MessageExt messageExt) throws Exception;
 
 }

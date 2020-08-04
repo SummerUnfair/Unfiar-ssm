@@ -3,25 +3,20 @@ package com.unfair.mq.consumer;/*
  * @date
  * @discription
  */
-
-import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
-import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
-import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import org.apache.rocketmq.common.message.MessageExt;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 @Component("userMessageListener")
-public class UserMessageListener implements MessageListenerConcurrently {
+public class UserMessageListener extends AbstractMessageListener {
 
     private static final Logger logger = LoggerFactory.getLogger(UserMessageListener.class);
 
     @Override
-    public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> list, ConsumeConcurrentlyContext consumeConcurrentlyContext) {
-        System.out.printf("%s Receive New Messages: %s %n", Thread.currentThread().getName(), list);
+    protected void businessProcess(MessageExt messageExt) throws Exception {
+        logger.info("消费测试");
+        System.out.printf("%s Receive New Messages: %s %n", Thread.currentThread().getName(), messageExt);
         System.out.println("unfair");
-        return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
     }
 }

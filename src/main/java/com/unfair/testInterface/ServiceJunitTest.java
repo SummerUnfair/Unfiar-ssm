@@ -80,7 +80,7 @@ public class ServiceJunitTest {
     }
 
     public static void main (String[] args) throws MQClientException, UnsupportedEncodingException, RemotingException, InterruptedException, MQBrokerException {
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 10; i++) {
             // Create a message instance, specifying topic, tag and message body.
             Message msg = new Message("TopicTest" /* Topic */,
                     "TagA" /* Tag */,
