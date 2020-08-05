@@ -43,13 +43,23 @@ public class UnfairController {
         return  "redirect:SubLogin";
     }
 
+    /**
+     * Model测试
+     * @param model 每次请求中都存在的默认参数，利用其addAttribute()方法即可将服务器的值传递到jsp页面中，在jsp页面利${message}即可取出其中的值
+     * @return
+     */
     @RequestMapping(value = "/SubLogin")
     public String json1(Model model){
         List<UserVO> userVO = userService.findAll(new UserDTO());
-        LOGGER.info("查询服务结束,共[{}]条用户信息",userVO.size());
-        model.addAttribute("userVO", userVO);
-        model.addAttribute("weekNumber", TimeUtils.get_Now_Week_Number()-1);
-        return "success";
+        if (userVO.size()!=0){
+            LOGGER.info("查询服务结束,共[{}]条用户信息",userVO.size());
+            model.addAttribute("userVO", userVO);
+            model.addAttribute("weekNumber", TimeUtils.get_Now_Week_Number()-1);
+            return "success";
+        }else{
+            model.addAttribute("message", "查询服务结束，无用户信息!");
+            return "test";
+        }
     }
 
     /**
@@ -69,13 +79,15 @@ public class UnfairController {
 
     /**
      *@RequestParam测试
+     *
      */
     @RequestMapping(value = "/contest")
     @ResponseBody
-    public String contextPathTest(@RequestParam(name = "unfair_name", required = true)Object unfair_name, HttpServletRequest request)  {
+    public String contextPathTest(@RequestParam(name = "userName", required = false,defaultValue = "unfair")Object userName,
+                                  HttpServletRequest req)  {
         String realPath =null;
         try {
-            realPath = request.getSession().getServletContext().getRealPath("/");
+            realPath = req.getSession().getServletContext().getRealPath("/");
             String a= "{\"id\":1,\"username\":\"男\"}";
             ObjectMapper mapper = new ObjectMapper();
             UserVO userVO1 = mapper.readValue(a, UserVO.class);
