@@ -39,11 +39,16 @@
     <c:when test="${weekNumber==6}">星期六</c:when>
     <c:when test="${weekNumber==7}">星期天</c:when>
     <c:otherwise>数字有误</c:otherwise>
-</c:choose>
-<br>
+</c:choose><br />
 <a href="/unfairHome/JsonStyle" target="_self">
-    <input type="button" name="unfairButton" value="Json是这个样子的" />
-</a>
+    <input type="button" name="unfairButton" value="Json格式展示页面" />
+</a><br />
+<a href="http://127.0.0.1:8080/druid/">
+    <input type="button" name="unfairButton" value="进入druid监控页面" />
+</a><br />
+<a href="http://192.168.33.100:8080/#/">
+    <input type="button" name="unfairButton" value="进入rocketmq监控页面" />
+</a><br />
 <%
     List list= new ArrayList<>();
     list.add("111");
