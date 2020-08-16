@@ -51,6 +51,8 @@ public abstract class AbstractMessageListener implements MessageListenerConcurre
                         messageExt.getMsgId(),
                         e);
                 e.printStackTrace();
+            }finally {
+                jedisCacheManager.unlock("fpm_gateway:consume:" + getConsumeGroup() + ":" + messageExt.getKeys(), "1");
             }
         }
         return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
