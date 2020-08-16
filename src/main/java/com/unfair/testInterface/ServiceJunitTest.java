@@ -8,6 +8,7 @@ import org.apache.rocketmq.client.exception.MQBrokerException;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.apache.rocketmq.client.producer.SendResult;
+import org.apache.rocketmq.client.producer.SendStatus;
 import org.apache.rocketmq.common.message.Message;
 import org.apache.rocketmq.remoting.common.RemotingHelper;
 import org.apache.rocketmq.remoting.exception.RemotingException;
@@ -80,14 +81,24 @@ public class ServiceJunitTest {
     }
 
     public static void main (String[] args) throws MQClientException, UnsupportedEncodingException, RemotingException, InterruptedException, MQBrokerException {
+        String topic = "TopicTest";
+        String tags = "TagA";
+        String msg = "ferao 帅";
         for (int i = 0; i < 10; i++) {
             // Create a message instance, specifying topic, tag and message body.
-            Message msg = new Message("TopicTest" /* Topic */,
-                    "TagA" /* Tag */,
-                    ("ferao 帅").getBytes(RemotingHelper.DEFAULT_CHARSET) /* Message body */
-            );
+            Message message = new Message();
+            message.setTopic(topic);
+            message.setTags(tags);
+            message.setKeys("unfair");
+            message.putUserProperty("producerGroup", defaultMQProducer.getProducerGroup());
+            message.setBody(msg.getBytes(RemotingHelper.DEFAULT_CHARSET));
             // Call send message to deliver message to one of brokers.
-            SendResult sendResult = defaultMQProducer.send(msg);
+            SendResult sendResult = defaultMQProducer.send(message);
+            if (SendStatus.SEND_OK.equals(sendResult.getSendStatus())) {
+                LOGGER.info("topic:{},tags:{},message:{},发送到MQ成功", topic, tags ,msg);
+            } else {
+                LOGGER.info("topic:{},tags:{},message:{},发送到MQ失败", topic, tags ,msg);
+            }
             System.out.printf("%s%n", sendResult);
         }
         //defaultMQProducer.shutdown();

@@ -17,7 +17,7 @@
         <property name="vipChannelEnabled" value="false"/>
         <property name="retryTimesWhenSendFailed" value="3"/>
     </bean>
-    <!-- 批量扣款消费者 -->
+    <!-- 开发用户消费者 -->
     <bean id="rocketTest" class="org.apache.rocketmq.client.consumer.DefaultMQPushConsumer" init-method="start" destroy-method="shutdown">
         <property name="namesrvAddr" value="192.168.33.100:9876"/>
         <property name="consumerGroup" value="please_rename_unique_group_name"/>
