@@ -1,4 +1,5 @@
-package com.unfair.mq.consumer;/*
+package com.unfair.mq.consumer;
+/*
  * @author Ferao
  * @date
  * @discription

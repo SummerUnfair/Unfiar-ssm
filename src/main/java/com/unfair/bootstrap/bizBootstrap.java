@@ -1,8 +1,6 @@
 package com.unfair.bootstrap;
 
-import com.alibaba.fastjson.JSON;
-import com.unfair.api.vo.UserVO;
-import com.unfair.mapper.UserMapper;
+import com.unfair.db.dao.UserMapper;
 import com.unfair.service.RedisService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * biz引导程序<br>
@@ -43,15 +39,12 @@ public class bizBootstrap implements ApplicationListener<ContextRefreshedEvent> 
     private void iniRedisInfo(){
 
         redisService.del("unfair:user_node_info");
-        List<UserVO> users = userMapper.findAll(null);
-        if (!users.isEmpty()){
+        int count = userMapper.countByExample(null);
+        LOGGER.info("查询服务结束,共[{}]条用户信息",count);
+        if (count!=0){
             LOGGER.info("==========Redis初始化成功==========");
-            for (UserVO user : users) {
-                redisService.hset("unfair:user_node_info",user.getId()+"-"+user.getAddress(), JSON.toJSONString(user));
-            }
         }else{
             LOGGER.info("==========Redis初始化失败==========");
         }
-
     }
 }
