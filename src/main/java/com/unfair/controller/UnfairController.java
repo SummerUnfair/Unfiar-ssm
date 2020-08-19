@@ -51,7 +51,7 @@ public class UnfairController {
     @RequestMapping(value = "/SubLogin")
     public String json1(Model model){
         List<UserVO> userVO = userService.findAll(new UserDTO());
-        if (userVO.size()!=0){
+        if (!userVO.isEmpty()){
             LOGGER.info("查询服务结束,共[{}]条用户信息",userVO.size());
             model.addAttribute("userVO", userVO);
             model.addAttribute("weekNumber", TimeUtils.get_Now_Week_Number()-1);
