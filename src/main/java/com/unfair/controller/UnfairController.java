@@ -3,6 +3,7 @@ package com.unfair.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.unfair.api.dto.UserDTO;
 import com.unfair.api.vo.UserVO;
+import com.unfair.db.model.User;
 import com.unfair.service.UserService;
 import com.unfair.utils.JacksonUtils;
 import com.unfair.utils.StringUtils;
@@ -50,10 +51,10 @@ public class UnfairController {
      */
     @RequestMapping(value = "/SubLogin")
     public String json1(Model model){
-        List<UserVO> userVO = userService.findAll(new UserDTO());
-        if (!userVO.isEmpty()){
-            LOGGER.info("查询服务结束,共[{}]条用户信息",userVO.size());
-            model.addAttribute("userVO", userVO);
+        List<User> users = userService.findAll(new UserDTO());
+        if (!users.isEmpty()){
+            LOGGER.info("查询服务结束,共[{}]条用户信息",users.size());
+            model.addAttribute("userVO", users);
             model.addAttribute("weekNumber", TimeUtils.get_Now_Week_Number()-1);
             return "success";
         }else{

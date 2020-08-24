@@ -1,13 +1,17 @@
 package com.unfair.bootstrap;
 
 import com.unfair.db.dao.UserMapper;
-import com.unfair.service.RedisService;
+import com.unfair.common.RedisService;
+import com.unfair.db.model.User;
+import com.unfair.db.model.UserCriteria;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * biz引导程序<br>
@@ -36,14 +40,17 @@ public class bizBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         }
     }
 
-    private void iniRedisInfo(){
+    private void iniRedisInfo() {
 
         redisService.del("unfair:user_node_info");
-        int count = userMapper.countByExample(null);
-        LOGGER.info("查询服务结束,共[{}]条用户信息",count);
-        if (count!=0){
+        UserCriteria criteria = new UserCriteria();
+        List<User> users = userMapper.selectByExample(criteria);
+
+        if (users.size()!=0) {
+            LOGGER.info("查询服务结束,共[{}]条用户信息", users.size());
             LOGGER.info("==========Redis初始化成功==========");
-        }else{
+        } else {
+            LOGGER.info("查询服务结束,共[{}]条用户信息", users.size());
             LOGGER.info("==========Redis初始化失败==========");
         }
     }

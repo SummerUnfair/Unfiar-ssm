@@ -1,4 +1,5 @@
-package com.unfair.utils.enumeration;
+package com.unfair.enumeration;
+
 /*
  * @author Ferao
  * @date
@@ -19,14 +20,14 @@ public enum StatusEnum {
     /**
      * 失败
      */
-    FAIL("F",  "处理失败");
+    FAIL("F", "处理失败");
 
     private String state;
     private String message;
 
-    StatusEnum(String state,String message){
-        this.state=state;
-        this.message=message;
+    StatusEnum(String state, String message) {
+        this.state = state;
+        this.message = message;
     }
 
     public String getState() {

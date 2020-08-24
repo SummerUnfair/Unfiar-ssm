@@ -1,4 +1,4 @@
-package com.unfair.service;
+package com.unfair.common;
 /*
  * @author Ferao
  * @date
