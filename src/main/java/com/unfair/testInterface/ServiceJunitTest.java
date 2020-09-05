@@ -39,7 +39,15 @@ public class ServiceJunitTest {
     public void userServiceTest() {
         UserService user = (UserService) ac.getBean("userService");
         UserDTO userVO1 = new UserDTO();
+        if (user ==null){
+            System.out.println("user对象为空");
+        }
         List<User> all = user.findAll(userVO1);
+        if (all == null) {
+
+            System.out.println("对象为空");
+        }
+
         LOGGER.info("接口测试，对象数组容量:[{}]条", all.size());
         for (User userVO : all) {
             System.out.println(userVO);

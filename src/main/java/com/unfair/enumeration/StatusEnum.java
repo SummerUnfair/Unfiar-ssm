@@ -34,15 +34,17 @@ public enum StatusEnum {
         return state;
     }
 
-    public void setState(String state) {
-        this.state = state;
-    }
-
     public String getMessage() {
         return message;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public static String getMessage(String state) {
+        String message = "";
+        for (StatusEnum statusEnum : StatusEnum.values()) {
+            if (statusEnum.getState().equals(state)) {
+                message = statusEnum.getState();
+            }
+        }
+        return message;
     }
 }
