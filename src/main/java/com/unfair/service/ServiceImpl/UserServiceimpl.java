@@ -6,9 +6,12 @@ import com.unfair.db.dao.UserMapper;
 import com.unfair.db.model.User;
 import com.unfair.db.model.UserCriteria;
 import com.unfair.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.List;
 
 /**
@@ -19,8 +22,15 @@ import java.util.List;
 @Service("userService")
 public class UserServiceimpl implements UserService {
 
+    private static final Logger log = LoggerFactory.getLogger(UserServiceimpl.class);
+
     @Autowired
     private UserMapper userMapper;
+
+    @PostConstruct
+    public void init() {
+        log.info("用户模块，初始化...");
+    }
 
     @Override
     @ApiAnnotation(desc = "查询所有用户")

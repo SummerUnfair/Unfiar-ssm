@@ -5,6 +5,16 @@ package com.unfair.enumeration;
  * @date
  * @discription
  */
+
+import com.unfair.aopUtils.ApiAnnotation;
+import lombok.Getter;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+@Getter
 public enum StatusEnum {
 
     /**
@@ -23,22 +33,15 @@ public enum StatusEnum {
     FAIL("F", "处理失败");
 
     private String state;
-    private String message;
+    private String desc;
 
-    StatusEnum(String state, String message) {
+    StatusEnum(String state, String desc) {
         this.state = state;
-        this.message = message;
+        this.desc = desc;
     }
 
-    public String getState() {
-        return state;
-    }
-
-    public String getMessage() {
-        return message;
-    }
-
-    public static String getMessage(String state) {
+    @ApiAnnotation(desc = "状态-->描述")
+    public static String getDesc(String state) {
         String message = "";
         for (StatusEnum statusEnum : StatusEnum.values()) {
             if (statusEnum.getState().equals(state)) {
@@ -46,5 +49,17 @@ public enum StatusEnum {
             }
         }
         return message;
+    }
+
+    @ApiAnnotation(desc = "all")
+    public static List toList() {
+        List list = new ArrayList();
+        for (StatusEnum statusEnum : StatusEnum.values()) {
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("state", statusEnum.getState());
+            map.put("desc", statusEnum.getDesc());
+            list.add(map);
+        }
+        return list;
     }
 }
