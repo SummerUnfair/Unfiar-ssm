@@ -5,6 +5,7 @@ import com.unfair.api.dto.UserDTO;
 import com.unfair.db.dao.UserMapper;
 import com.unfair.db.model.User;
 import com.unfair.db.model.UserCriteria;
+import com.unfair.mq.producer.MessageProducer;
 import com.unfair.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,6 +28,9 @@ public class UserServiceimpl implements UserService {
     @Autowired
     private UserMapper userMapper;
 
+    @Autowired
+    private MessageProducer messageProducer;
+
     @PostConstruct
     public void init() {
         log.info("用户模块，初始化...");
@@ -37,7 +41,7 @@ public class UserServiceimpl implements UserService {
     public List<User> findAll(UserDTO userDTO) {
 
         UserCriteria criteria = new UserCriteria();
+        messageProducer.producerMessage("TopicTest","find_All","610622199805120911","msg:success ..");
         return userMapper.selectByExample(criteria);
-
     }
 }
