@@ -42,7 +42,7 @@ public class ServiceJunitTest {
         if (user ==null){
             System.out.println("user对象为空");
         }
-        List<User> all = user.findAll(userVO1);
+        List<User> all = user.queryEntry(userVO1);
         if (all == null) {
 
             System.out.println("对象为空");

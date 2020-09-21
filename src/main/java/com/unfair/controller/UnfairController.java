@@ -51,7 +51,7 @@ public class UnfairController {
      */
     @RequestMapping(value = "/SubLogin")
     public String json1(Model model){
-        List<User> users = userService.findAll(new UserDTO());
+        List<User> users = userService.queryEntry(new UserDTO());
         if (!users.isEmpty()){
             LOGGER.info("查询服务结束,共[{}]条用户信息",users.size());
             model.addAttribute("userVO", users);

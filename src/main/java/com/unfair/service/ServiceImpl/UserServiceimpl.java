@@ -38,8 +38,7 @@ public class UserServiceimpl implements UserService {
 
     @Override
     @ApiAnnotation(desc = "查询所有用户")
-    public List<User> findAll(UserDTO userDTO) {
-
+    public List<User> queryEntry(UserDTO userDTO) {
         UserCriteria criteria = new UserCriteria();
         messageProducer.producerMessage("TopicTest","find_All","610622199805120911","msg:success ..");
         return userMapper.selectByExample(criteria);
