@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.unfair.api.dto.UserDTO;
 import com.unfair.api.vo.UserVO;
 import com.unfair.db.model.User;
+import com.unfair.enumeration.StatusEnum;
 import com.unfair.service.UserService;
 import com.unfair.utils.JacksonUtils;
 import com.unfair.utils.StringUtils;
@@ -64,23 +65,7 @@ public class UnfairController {
     }
 
     /**
-     *@@ResponseBody测试
-     * 将数据返回给浏览器,如果是对象,转为json返回给浏览器
-     */
-    @GetMapping("/JsonStyle")
-    @ResponseBody
-    public Map jsonStyle(){
-        Map<String, Object> resultMap = new HashMap<String, Object>();
-        resultMap.put("titile", "主题");
-        resultMap.put("message", "展示简单得Json格式");
-        resultMap.put("status", "success");
-        LOGGER.info("JsonStyle 转换内容:[{}]",JacksonUtils.ObjcetToJsonString(resultMap));
-        return resultMap;
-    }
-
-    /**
      *@RequestParam测试
-     *
      */
     @RequestMapping(value = "/contest")
     @ResponseBody
