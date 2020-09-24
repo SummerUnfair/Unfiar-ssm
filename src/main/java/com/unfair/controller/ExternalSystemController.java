@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
 /**
@@ -40,8 +39,9 @@ public class ExternalSystemController {
     @PostMapping("/api/foreign/query")
     public CommonResult queryEntry(@RequestBody BusinessReqMsg reqMsg, Model model) {
         validate(reqMsg);
-        CommonResult result = new CommonResult();
+
         LOGGER.info("用户业务开始 [{}]", JSON.toJSONString(reqMsg));
+        CommonResult result;
         BusinessReqDTO dto = JSON.parseObject((String) reqMsg.getData(), BusinessReqDTO.class);
         result = (CommonResult) userService.queryEntry(dto);
         LOGGER.info("用户业务结束");

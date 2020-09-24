@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
@@ -54,13 +55,18 @@ public class UserServiceimpl implements UserService {
         log.info("主动查询开始");
 
         UserCriteria criteria = new UserCriteria();
+        criteria.setOrderByClause("updateTime DESC");
         List<User> user = userMapper.selectByExample(criteria);
         messageProducer.producerMessage("TopicTest","find_All","610622199805120911","msg:success ..");
+
+        if (CollectionUtils.isEmpty(user)) {
+            return null;
+        }
 
         return CommonResult.builder()
                 .respCode(StatusEnum.SUCCESS.getState())
                 .respMsg(StatusEnum.SUCCESS.getDesc())
-                .data(user)
+                .data(user.get(0))
                 .build();
     }
 }
