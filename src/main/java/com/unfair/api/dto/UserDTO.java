@@ -5,6 +5,7 @@ package com.unfair.api.dto;
  * @discription
  */
 import com.alibaba.fastjson.annotation.JSONField;
+import com.unfair.bootstrap.base.BaseRequest;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,7 @@ import java.util.Objects;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDTO {
+public class UserDTO implements BaseRequest {
 
     @JSONField(name = "id")
     private String id;

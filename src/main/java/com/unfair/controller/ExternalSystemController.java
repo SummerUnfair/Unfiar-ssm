@@ -1,7 +1,7 @@
 package com.unfair.controller;
 
 import com.unfair.enumeration.StatusEnum;
-import com.unfair.response.CommonResult;
+import com.unfair.bootstrap.response.CommonResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +22,8 @@ public class ExternalSystemController {
      */
     @GetMapping("/api/foreign/query")
     public CommonResult queryEntry() {
+
+
 
         return CommonResult.builder()
                 .respCode(StatusEnum.SUCCESS.getState())

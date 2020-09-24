@@ -1,4 +1,4 @@
-package com.unfair.response;
+package com.unfair.bootstrap.response;
 
 import com.alibaba.fastjson.annotation.JSONField;
 import com.unfair.bootstrap.base.BaseResponse;

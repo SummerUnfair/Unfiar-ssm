@@ -4,5 +4,7 @@ import java.util.List;
 
 public interface BaseService<T,E> {
 
-    public List<T> queryEntry(E e);
+    public List<T> queryEntry_original(E e);
+
+    public BaseResponse queryEntry(BaseRequest request);
 }
