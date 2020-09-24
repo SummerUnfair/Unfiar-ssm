@@ -1,6 +1,8 @@
 package com.unfair.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.unfair.api.dto.BusinessReqDTO;
 import com.unfair.api.dto.UserDTO;
 import com.unfair.api.vo.UserVO;
 import com.unfair.bootstrap.request.BusinessReqMsg;
@@ -40,10 +42,11 @@ public class UnfairController {
     public String login(@RequestBody BusinessReqMsg reqMsg, Model model) {
 
         validate(reqMsg);
-        // todo 封装实体类
-        // todo LOGGER.info("用户业务开始 [{}]", JSON.toJSONString(repayApplyDTO));
 
-        CommonResult resMsg = (CommonResult) userService.queryEntry(new UserDTO());
+        BusinessReqDTO dto = JSON.parseObject((String) reqMsg.getData(), BusinessReqDTO.class);
+        LOGGER.info("用户业务开始 [{}]", JSON.toJSONString(dto));
+
+        CommonResult resMsg = (CommonResult) userService.queryEntry(dto);
         LOGGER.info("用户[{}]登录", StringUtils.removeSign(StringUtils.toLowerCase(reqMsg)));
         if (resMsg.getData() != null) {
 //            LOGGER.info("查询服务结束,共[{}]条用户信息", users.size());
