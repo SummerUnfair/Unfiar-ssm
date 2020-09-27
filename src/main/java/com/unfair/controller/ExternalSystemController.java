@@ -2,6 +2,7 @@ package com.unfair.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.unfair.api.dto.BusinessReqDTO;
+import com.unfair.bootstrap.base.BaseController;
 import com.unfair.bootstrap.request.BusinessReqMsg;
 import com.unfair.bootstrap.response.CommonResult;
 import com.unfair.service.UserService;
@@ -21,7 +22,7 @@ import javax.annotation.Resource;
  * @description:外部系统访问
  */
 @RestController
-public class ExternalSystemController {
+public class ExternalSystemController extends BaseController {
 
     private static Logger LOGGER = LoggerFactory.getLogger(UnfairController.class);
 
@@ -51,7 +52,7 @@ public class ExternalSystemController {
     private void validate(BusinessReqMsg reqMsg) {
         Assert.notNull(reqMsg.getActionCmd(), "业务操作名不能为空");
         Assert.notNull(reqMsg.getRequestId(), "请求流水号不能为空");
-        Assert.notNull(reqMsg.getRequestDate(),"请求日期不能为空");
+        Assert.notNull(reqMsg.getRequestDate(), "请求日期不能为空");
         Assert.notNull(reqMsg.getData(), "用户信息不能为空");
     }
 }

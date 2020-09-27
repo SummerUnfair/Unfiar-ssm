@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.unfair.api.dto.BusinessReqDTO;
 import com.unfair.api.dto.UserDTO;
 import com.unfair.api.vo.UserVO;
+import com.unfair.bootstrap.base.BaseController;
 import com.unfair.bootstrap.request.BusinessReqMsg;
 import com.unfair.bootstrap.response.CommonResult;
 import com.unfair.service.UserService;
@@ -23,7 +24,7 @@ import java.io.IOException;
 
 @Controller
 @RequestMapping("/unfairHome")
-public class UnfairController {
+public class UnfairController extends BaseController {
 
     @Resource
     private UserService userService;
