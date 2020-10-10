@@ -1,0 +1,23 @@
+sql方面:
+
+        1. 类似于java中的多重if语句，一般用于实现区间判断
+
+			case
+
+			when 要判断的条件1 then 返回的值1或语句1;
+
+			when 要判断的条件2 then 返回的值2或语句2;
+
+			...
+
+			else 要返回的值n或语句n;
+
+			end
+
+		2. || 等同于 or
+
+service方面:
+
+        1. String ... args,可变长参数
+
+
