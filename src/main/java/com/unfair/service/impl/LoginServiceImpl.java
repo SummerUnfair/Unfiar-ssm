@@ -28,14 +28,17 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public boolean checkUserInfo(LoginInfoDTO dto) {
-        LOGGER.info("用户校验开始 [{}]", JSON.toJSONString(dto));
+        LOGGER.info("用户校验开始 : [{}]", JSON.toJSONString(dto));
         validate(dto);
+        boolean result = false;
         CommonResult resMsg = (CommonResult) userService.queryEntry(dto);
         if (!StringUtils.isEmpty(resMsg.getRespCode())) {
-            return true;
+            result = true;
         } else {
-            return false;
+            result = false;
         }
+        LOGGER.info("用户校验结束 : [{}],结果 : [{}]", JSON.toJSONString(dto),result);
+        return result;
     }
 
     private void validate(LoginInfoDTO dto) {

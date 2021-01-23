@@ -21,7 +21,7 @@ public class itemController {
     public ModelAndView test2(){
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.addObject("msg","t1 success");
-        modelAndView.setViewName("test");
+        modelAndView.setViewName("NotExit");
         return modelAndView;
     }
 
@@ -34,14 +34,14 @@ public class itemController {
     @RequestMapping("/t4")
     public void test4(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        response.sendRedirect("test.jsp");
+        response.sendRedirect("NotExit.jsp");
     }
 
     @RequestMapping("/t5")
     public void test5(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 
         request.setAttribute("msg","/t5");
-        request.getRequestDispatcher("WEB-INF/pages/test.jsp").forward(request,response);
+        request.getRequestDispatcher("WEB-INF/pages/NotExit.jsp").forward(request,response);
     }
 
 }

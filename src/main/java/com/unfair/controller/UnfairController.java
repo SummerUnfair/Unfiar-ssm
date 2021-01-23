@@ -40,8 +40,7 @@ public class UnfairController extends BaseController {
      *
      * @param reqMsg
      * @param model  每次请求中都存在的默认参数，利用其addAttribute()方法即可将服务器的值传递到jsp页面中，在jsp页面利${message}即可取出其中的值
-     * @return String reqMsg -> username=2343&password=3&money=1
-     * BusinessReqMsg reqMsg -> BusinessReqMsg
+     * @return 跳转对应页面
      */
     @PostMapping("/Login")
     public String login(@RequestBody BusinessReqMsg reqMsg, Model model) {
@@ -52,7 +51,7 @@ public class UnfairController extends BaseController {
             return "redirect:SubLogin";
         }else {
             model.addAttribute("message", "查询服务结束，无用户信息!");
-            return "test";
+            return "NotExit";
         }
     }
 
