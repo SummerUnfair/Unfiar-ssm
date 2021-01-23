@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.apache.ibatis.type.Alias;
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 import java.util.Objects;
 
@@ -22,6 +24,8 @@ public class UserVO {
     private String sex;
     @JSONField(name = "address")
     private String address;
+    //封装参数的时候，将数据转为Date,并且格式化
+    @DateTimeFormat(pattern="yyyy-MM-dd")
     @JSONField(name = "createTime")
     private Date createTime;
     @JSONField(name = "updateTime")

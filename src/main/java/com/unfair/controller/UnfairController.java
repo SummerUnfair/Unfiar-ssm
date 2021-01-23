@@ -1,11 +1,14 @@
 package com.unfair.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.unfair.api.dto.BusinessReqDTO;
 import com.unfair.api.dto.UserDTO;
 import com.unfair.api.vo.UserVO;
-import com.unfair.db.model.User;
+import com.unfair.bootstrap.base.BaseController;
+import com.unfair.bootstrap.request.BusinessReqMsg;
+import com.unfair.bootstrap.response.CommonResult;
 import com.unfair.service.UserService;
-import com.unfair.utils.JacksonUtils;
 import com.unfair.utils.StringUtils;
 import com.unfair.utils.TimeUtils;
 import org.springframework.util.Assert;
@@ -14,12 +17,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * @author fenghao
@@ -27,7 +28,7 @@ import java.util.Map;
 @SuppressWarnings("AlibabaClassMustHaveAuthor")
 @Controller
 @RequestMapping("/unfairHome")
-public class UnfairController {
+public class UnfairController extends BaseController {
 
     @Resource
     private UserService userService;
@@ -35,92 +36,78 @@ public class UnfairController {
     private static Logger LOGGER = LoggerFactory.getLogger(UnfairController.class);
 
     /**
-     * RequestBody测试
-     * @param body
-     * @return username=2343&password=3&money=1
-     * function:RequestBody Test
+     * RequestBody、Model测试
+     *
+     * @param reqMsg
+     * @param model  每次请求中都存在的默认参数，利用其addAttribute()方法即可将服务器的值传递到jsp页面中，在jsp页面利${message}即可取出其中的值
+     * @return String reqMsg -> username=2343&password=3&money=1
+     * BusinessReqMsg reqMsg -> BusinessReqMsg
      */
     @PostMapping("/Login")
-    public String login(@RequestBody String body){
-        //切换requestbody使用方式时启用
-        Assert.notNull(body,"用户信息不能为空");
-        LOGGER.info("用户[{}]登录",StringUtils.removeSign(StringUtils.toLowerCase(body)));
-        return  "redirect:SubLogin";
-    }
+    public String login(@RequestBody BusinessReqMsg reqMsg, Model model) {
 
-    /**
-     * Model测试
-     * @param model 每次请求中都存在的默认参数，利用其addAttribute()方法即可将服务器的值传递到jsp页面中，在jsp页面利${message}即可取出其中的值
-     * @return
-     */
-    @RequestMapping(value = "/SubLogin")
-    public String json1(Model model){
-        List<User> users = userService.findAll(new UserDTO());
-        if (!users.isEmpty()){
-            LOGGER.info("查询服务结束,共[{}]条用户信息",users.size());
-            model.addAttribute("userVO", users);
-            model.addAttribute("weekNumber", TimeUtils.get_Now_Week_Number()-1);
-            return "success";
-        }else{
+        validate(reqMsg);
+
+        BusinessReqDTO dto = JSON.parseObject((String) reqMsg.getData(), BusinessReqDTO.class);
+        LOGGER.info("用户业务开始 [{}]", JSON.toJSONString(dto));
+
+        CommonResult resMsg = (CommonResult) userService.queryEntry(dto);
+        LOGGER.info("用户[{}]登录", StringUtils.removeSign(StringUtils.toLowerCase(reqMsg)));
+        if (resMsg.getData() != null) {
+//            LOGGER.info("查询服务结束,共[{}]条用户信息", users.size());
+//            model.addAttribute("userVO", users);
+            model.addAttribute("weekNumber", TimeUtils.get_Now_Week_Number() - 1);
+            return "redirect:SubLogin";
+        } else {
             model.addAttribute("message", "查询服务结束，无用户信息!");
             return "test";
         }
     }
 
-    /**
-     *@@ResponseBody测试
-     * 将数据返回给浏览器,如果是对象,转为json返回给浏览器
-     */
-    @GetMapping("/JsonStyle")
-    @ResponseBody
-    public Map jsonStyle(){
-        Map<String, Object> resultMap = new HashMap<String, Object>(4);
-        resultMap.put("titile", "主题");
-        resultMap.put("message", "展示简单得Json格式");
-        resultMap.put("status", "success");
-        LOGGER.info("JsonStyle 转换内容:[{}]",JacksonUtils.ObjcetToJsonString(resultMap));
-        return resultMap;
+    private void validate(BusinessReqMsg reqMsg) {
+        Assert.notNull(reqMsg, "用户信息不能为空");
     }
 
     /**
-     *@RequestParam测试
-     *
+     * @RequestParam测试
      */
     @RequestMapping(value = "/contest")
     @ResponseBody
-    public String contextPathTest(@RequestParam(name = "userName", required = false,defaultValue = "unfair")Object userName,
-                                  HttpServletRequest req)  {
-        String realPath =null;
+    public String contextPathTest(@RequestParam(name = "userName", required = false, defaultValue = "unfair") Object userName,
+                                  HttpServletRequest req) {
+        String realPath = null;
         try {
             realPath = req.getSession().getServletContext().getRealPath("/");
-            String a= "{\"id\":1,\"username\":\"男\"}";
+            String a = "{\"id\":1,\"username\":\"男\"}";
             ObjectMapper mapper = new ObjectMapper();
             UserVO userVo = mapper.readValue(a, UserVO.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return realPath+"测试";
+        return realPath + "测试";
     }
 
     /**
      * RequestParam 测试
+     *
      * @param name
      * @return
      */
     @RequestMapping("/testRequestParam")
     @ResponseBody
-    public String testRequestParam(@RequestParam(name="username") String name){
+    public String testRequestParam(@RequestParam(name = "username") String name) {
         System.out.println(name);
-        return  "ResponseBody success";
+        return "ResponseBody success";
     }
 
     /**
-     *  RequestMapping注解
+     * RequestMapping注解
+     *
      * @return
      */
-    @RequestMapping(value="/sayHello",params = {"username=heihei"},method = {RequestMethod.GET},headers = {"Accept"})
-    public String sayHello(){
-        return "sayHellosuccess" ;
+    @RequestMapping(value = "/sayHello", params = {"username=heihei"}, method = {RequestMethod.GET}, headers = {"Accept"})
+    public String sayHello() {
+        return "sayHellosuccess";
     }
 
 }

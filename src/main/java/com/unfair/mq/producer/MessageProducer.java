@@ -12,7 +12,8 @@ import org.springframework.stereotype.Service;
 
 /**
  * @author fenghao
- * @discription
+ * @discription 分布式系统重要的组件-消息中间件，解决应用耦合，异步消息，流量削峰等问题
+ * 注:分布式系统是若干独立计算机的集合，这些计算机对于用户来说就像单个相关系统
  * @create 2020-08-21 21:56
  */
 
