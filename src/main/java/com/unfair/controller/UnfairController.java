@@ -2,20 +2,20 @@ package com.unfair.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.unfair.api.dto.BusinessReqDTO;
+import com.unfair.api.dto.LoginInfoDTO;
 import com.unfair.api.vo.UserVO;
 import com.unfair.bootstrap.base.BaseController;
 import com.unfair.bootstrap.request.BusinessReqMsg;
-import com.unfair.bootstrap.response.CommonResult;
+import com.unfair.service.LoginService;
 import com.unfair.service.UserService;
-import com.unfair.utils.StringUtils;
 import com.unfair.utils.TimeUtils;
-import org.springframework.util.Assert;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
@@ -23,13 +23,15 @@ import java.io.IOException;
 /**
  * @author fenghao
  */
-@SuppressWarnings("AlibabaClassMustHaveAuthor")
 @Controller
 @RequestMapping("/unfairHome")
 public class UnfairController extends BaseController {
 
     @Resource
     private UserService userService;
+
+    @Autowired
+    private LoginService loginService;
 
     private static Logger LOGGER = LoggerFactory.getLogger(UnfairController.class);
 
@@ -43,25 +45,15 @@ public class UnfairController extends BaseController {
      */
     @PostMapping("/Login")
     public String login(@RequestBody BusinessReqMsg reqMsg, Model model) {
-
-        validate(reqMsg);
-
-        BusinessReqDTO dto = JSON.parseObject((String) reqMsg.getData(), BusinessReqDTO.class);
-        LOGGER.info("用户业务开始 [{}]", JSON.toJSONString(dto));
-
-        CommonResult resMsg = (CommonResult) userService.queryEntry(dto);
-        LOGGER.info("用户[{}]登录", StringUtils.removeSign(StringUtils.toLowerCase(reqMsg)));
-        if (resMsg.getData() != null) {
+        LoginInfoDTO dto = JSON.parseObject((String) reqMsg.getData(), LoginInfoDTO.class);
+        boolean isExit = loginService.checkUserInfo(dto);
+        if (isExit ==true){
             model.addAttribute("weekNumber", TimeUtils.get_Now_Week_Number() - 1);
             return "redirect:SubLogin";
-        } else {
+        }else {
             model.addAttribute("message", "查询服务结束，无用户信息!");
             return "test";
         }
-    }
-
-    private void validate(BusinessReqMsg reqMsg) {
-        Assert.notNull(reqMsg, "用户信息不能为空");
     }
 
     /**

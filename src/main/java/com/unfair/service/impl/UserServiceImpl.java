@@ -1,7 +1,6 @@
-package com.unfair.service.ServiceImpl;
+package com.unfair.service.impl;
 
 import com.unfair.aopUtils.ApiAnnotation;
-import com.unfair.api.dto.UserDTO;
 import com.unfair.bootstrap.base.BaseRequest;
 import com.unfair.bootstrap.base.BaseResponse;
 import com.unfair.db.dao.UserMapper;
@@ -26,9 +25,9 @@ import java.util.List;
  * @account 普通用户服务
  */
 @Service("userService")
-public class UserServiceimpl implements UserService {
+public class UserServiceImpl implements UserService {
 
-    private static final Logger log = LoggerFactory.getLogger(UserServiceimpl.class);
+    private static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
 
     @Autowired
     private UserMapper userMapper;
@@ -39,14 +38,6 @@ public class UserServiceimpl implements UserService {
     @PostConstruct
     public void init() {
         log.info("用户模块，初始化...");
-    }
-
-    @Override
-    @ApiAnnotation(desc = "查询入口-0")
-    public List<User> queryEntry_original(UserDTO userDTO) {
-        UserCriteria criteria = new UserCriteria();
-        messageProducer.producerMessage("TopicTest","find_All","610622199805120911","msg:success ..");
-        return userMapper.selectByExample(criteria);
     }
 
     @Override

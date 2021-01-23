@@ -17,17 +17,17 @@ public class AnnotationPointCut {
 
     public static final Logger logger = LoggerFactory.getLogger(AnnotationPointCut.class);
 
-    @Before("execution(* com.unfair.service.ServiceImpl.*.*(..))")
+    @Before("execution(* com.unfair.service.impl.*.*(..))")
     public void before(){
         logger.info("=================开始请求<{}>==================");
     }
 
-    @After("execution(* com.unfair.service.ServiceImpl.*.*(..))")
+    @After("execution(* com.unfair.service.impl.*.*(..))")
     public void after(){
         logger.info("=================结束请求<{}>==================");
     }
     //在环绕增强中，可以给定一个参数，代表要获取处理切入的点
-//    @Around("execution(* com.unfair.service.ServiceImpl.*.*(..))")
+//    @Around("execution(* com.unfair.service.impl.*.*(..))")
 //    public void around(ProceedingJoinPoint jp) throws Throwable {
 //        System.out.println("ferao aop around1 anntation success ..");
 //        Signature signature = jp.getSignature(); //获取签名

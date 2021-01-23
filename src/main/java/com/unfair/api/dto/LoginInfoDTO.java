@@ -5,8 +5,10 @@ import com.unfair.bootstrap.base.BaseRequest;
 
 /**
  * @author fenghao
+ * @discription
+ * @create 2021-01-23 14:20
  */
-public class BusinessReqDTO implements BaseRequest {
+public class LoginInfoDTO implements BaseRequest {
 
     @JSONField(name = "username")
     private String username;
@@ -31,7 +33,7 @@ public class BusinessReqDTO implements BaseRequest {
 
     @Override
     public String toString() {
-        return "BusinessReqDTO{" +
+        return "LoginInfoDTO{" +
                 "username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 '}';

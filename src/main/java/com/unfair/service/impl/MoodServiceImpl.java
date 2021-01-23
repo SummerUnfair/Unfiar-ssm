@@ -1,4 +1,4 @@
-package com.unfair.service.ServiceImpl;
+package com.unfair.service.impl;
 
 import com.unfair.enumeration.StatusEnum;
 import com.unfair.service.MoodService;
@@ -8,7 +8,7 @@ import com.unfair.service.MoodService;
  * @discription
  * @create 2020-08-21 22:42
  */
-public class MoodServiceimpl implements MoodService {
+public class MoodServiceImpl implements MoodService {
 
     public void boring() {
 
