@@ -21,6 +21,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author fenghao
+ */
+@SuppressWarnings("AlibabaClassMustHaveAuthor")
 @Controller
 @RequestMapping("/unfairHome")
 public class UnfairController {
@@ -70,7 +74,7 @@ public class UnfairController {
     @GetMapping("/JsonStyle")
     @ResponseBody
     public Map jsonStyle(){
-        Map<String, Object> resultMap = new HashMap<String, Object>();
+        Map<String, Object> resultMap = new HashMap<String, Object>(4);
         resultMap.put("titile", "主题");
         resultMap.put("message", "展示简单得Json格式");
         resultMap.put("status", "success");
@@ -91,7 +95,7 @@ public class UnfairController {
             realPath = req.getSession().getServletContext().getRealPath("/");
             String a= "{\"id\":1,\"username\":\"男\"}";
             ObjectMapper mapper = new ObjectMapper();
-            UserVO userVO1 = mapper.readValue(a, UserVO.class);
+            UserVO userVo = mapper.readValue(a, UserVO.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
