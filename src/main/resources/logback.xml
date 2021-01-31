@@ -23,7 +23,7 @@
         name: 变量的名称
         value: 的值时变量定义的值
     -->
-    <property name="log_path" value="D:/data/unfair-ssm/logs" />
+    <property name="log_path" value="C:\\data\\unfair-ssm\\logs" />
     <!-- 日志最大的历史 30天 -->
     <property name="maxHistory" value="30"/>
     <!--子节点appender-->
@@ -74,14 +74,14 @@
             <!--<pattern>%d %p (%file:%line\)- %m%n</pattern>-->
             <!--格式化输出：%d:表示日期    %thread:表示线程名     %-5level:级别从左显示5个字符宽度  %msg:日志消息    %n:是换行符-->
             <pattern>控制台-%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger - %msg%n</pattern>
-            <charset>GBK</charset>
+            <charset>UTF-8</charset>
         </encoder>
     </appender>
 
     <!--输出到文件-->
     <appender name="fileInfoLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!--被写入的文件名，可以是相对目录，也可以是绝对目录，如果上级目录不存在会自动创建，没有默认值。-->
-        <file>D:\SpringbootTesk\unfiar-ssm\logs\unfair-ssm-all.log</file>
+        <file>${log_path}\unfair-ssm-all.log</file>
         <!--<append>：如果是 true，日志被追加到文件结尾，如果是 false，清空现存文件，默认是true-->
         <append>true</append>
         <!--根据级别过滤掉匹配的日志，不输出error级别的日志-->
@@ -114,7 +114,7 @@
     </appender>
     <!--配置error信息输出到一个文件-->
     <appender name="fileErrorLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>D:\SpringbootTesk\unfiar-ssm\logs\unfair-ssm-error.log</file>
+        <file>${log_path}\unfair-ssm-error.log</file>
         <!--根据范围过滤日志，只输出error级别的日志-->
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
             <level>ERROR</level>

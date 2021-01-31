@@ -33,5 +33,5 @@
     <import resource="classpath:/context/spring-redis.xml"/>
 
     <!--rocketmq-->
-    <import resource="classpath:/context/spring-rocketmq.xml"/>
+    <!--<import resource="classpath:/context/spring-rocketmq.xml"/>-->
 </beans>

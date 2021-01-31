@@ -1,0 +1,16 @@
+文件记录-2020-08-19 13:59:40 [RMI TCP Connection(3)-127.0.0.1] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext: initialization started
+文件记录-2020-08-19 13:59:41 [RMI TCP Connection(3)-127.0.0.1] INFO  c.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+文件记录-2020-08-19 14:02:23 [RMI TCP Connection(3)-127.0.0.1] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext: initialization started
+文件记录-2020-08-19 14:02:25 [RMI TCP Connection(3)-127.0.0.1] INFO  c.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+文件记录-2020-08-19 14:03:02 [RMI TCP Connection(3)-127.0.0.1] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext: initialization started
+文件记录-2020-08-19 14:03:03 [RMI TCP Connection(3)-127.0.0.1] INFO  c.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+文件记录-2020-08-19 14:07:07 [RMI TCP Connection(3)-127.0.0.1] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext: initialization started
+文件记录-2020-08-19 14:07:08 [RMI TCP Connection(3)-127.0.0.1] INFO  c.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+文件记录-2020-08-19 14:10:56 [RMI TCP Connection(3)-127.0.0.1] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext: initialization started
+文件记录-2020-08-19 14:10:57 [RMI TCP Connection(3)-127.0.0.1] INFO  c.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+文件记录-2020-08-19 14:11:57 [RMI TCP Connection(3)-127.0.0.1] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext: initialization started
+文件记录-2020-08-19 14:11:58 [RMI TCP Connection(3)-127.0.0.1] INFO  c.alibaba.druid.pool.DruidDataSource - {dataSource-1} inited
+文件记录-2020-08-19 14:11:59 [RMI TCP Connection(3)-127.0.0.1] INFO  com.unfair.bootstrap.bizBootstrap - ==========系统启动成功==========
+文件记录-2020-08-19 14:11:59 [RMI TCP Connection(3)-127.0.0.1] INFO  o.s.web.context.ContextLoader - Root WebApplicationContext initialized in 1708 ms
+文件记录-2020-08-19 14:11:59 [RMI TCP Connection(3)-127.0.0.1] INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+文件记录-2020-08-19 14:12:00 [RMI TCP Connection(3)-127.0.0.1] INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1044 ms

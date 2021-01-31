@@ -32,8 +32,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
 
-    @Autowired
-    private MessageProducer messageProducer;
+//    @Autowired
+//    private MessageProducer messageProducer;
 
     @PostConstruct
     public void init() {
@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService {
         UserCriteria criteria = new UserCriteria();
         criteria.setOrderByClause("updateTime DESC");
         List<User> user = userMapper.selectByExample(criteria);
-        messageProducer.producerMessage("TopicTest","find_All","610622199805120911","msg:success ..");
+      //  messageProducer.producerMessage("TopicTest","find_All","610622199805120911","msg:success ..");
 
         if (CollectionUtils.isEmpty(user)) {
             return null;
