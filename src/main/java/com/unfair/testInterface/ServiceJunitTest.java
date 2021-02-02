@@ -13,6 +13,7 @@ import org.springframework.util.Assert;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
+import java.util.Iterator;
 import java.util.Set;
 
 public class ServiceJunitTest {
@@ -46,13 +47,21 @@ public class ServiceJunitTest {
     public void validationTest() {
 
         LoginInfoDTO loginInfoDTO = new LoginInfoDTO();
-        Set<ConstraintViolation<LoginInfoDTO>> result = Validation.buildDefaultValidatorFactory().getValidator().validate(loginInfoDTO,new Class[0]);
+        dataDEO dataDEO = new dataDEO();
+        dataDEO.setData(loginInfoDTO);
+        Set result = Validation.buildDefaultValidatorFactory().getValidator().validate(dataDEO.getData(),new Class[0]);
 
         System.out.println(result);
         System.out.println("==========================");
+
+        Iterator iterator = result.iterator();
+        while (iterator.hasNext()) {
+            ConstraintViolation violation = (ConstraintViolation)iterator.next();
+            System.out.println(violation.getPropertyPath().toString()+" =="+violation.getMessage());
+        }
         // 对结果进行遍历输出
-        result.stream().map(v -> v.getPropertyPath() + " " + v.getMessage() )
-                .forEach(System.out::println);
+//        result.stream().map(v -> v.getPropertyPath() + " " + v.getMessage() )
+//                .forEach(System.out::println);
 
     }
 
@@ -68,4 +77,16 @@ public class ServiceJunitTest {
         redisService.set("unfair", "unfair1111");
     }
 
+}
+class dataDEO {
+
+    Object data;
+
+    public Object getData() {
+        return data;
+    }
+
+    public void setData(Object data) {
+        this.data = data;
+    }
 }
