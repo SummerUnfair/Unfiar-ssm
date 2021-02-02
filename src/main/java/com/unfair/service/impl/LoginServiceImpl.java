@@ -1,6 +1,7 @@
 package com.unfair.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.unfair.annotation.RequestVerify;
 import com.unfair.api.dto.LoginInfoDTO;
 import com.unfair.bootstrap.response.CommonResult;
 import com.unfair.service.LoginService;
@@ -27,6 +28,7 @@ public class LoginServiceImpl implements LoginService {
     private UserService userService;
 
     @Override
+    @RequestVerify
     public boolean checkUserInfo(LoginInfoDTO dto) {
         LOGGER.info("用户校验开始 : [{}]", JSON.toJSONString(dto));
         validate(dto);

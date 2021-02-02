@@ -1,6 +1,6 @@
 package com.unfair.bootstrap;
 
-import com.unfair.aop.ApiAnnotation;
+import com.unfair.annotation.ApiAnnotation;
 import com.unfair.db.dao.UserMapper;
 import com.unfair.common.RedisService;
 import com.unfair.db.model.User;

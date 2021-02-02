@@ -1,6 +1,6 @@
 package com.unfair.service.impl;
 
-import com.unfair.aop.ApiAnnotation;
+import com.unfair.annotation.ApiAnnotation;
 import com.unfair.bootstrap.base.BaseRequest;
 import com.unfair.bootstrap.base.BaseResponse;
 import com.unfair.db.dao.UserMapper;
