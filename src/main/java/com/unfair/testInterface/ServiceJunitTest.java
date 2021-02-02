@@ -1,9 +1,7 @@
 package com.unfair.testInterface;
 
 import com.unfair.api.dto.LoginInfoDTO;
-import com.unfair.api.dto.UserDTO;
 import com.unfair.service.LoginService;
-import com.unfair.service.UserService;
 import com.unfair.common.RedisService;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,7 +19,7 @@ public class ServiceJunitTest {
 
     @Before
     public void before() {
-        ac = new ClassPathXmlApplicationContext("spring-common.xml");
+        ac   = new ClassPathXmlApplicationContext("spring-common.xml");
         redisService = (RedisService) ac.getBean("redisService");
     }
 
@@ -30,21 +28,11 @@ public class ServiceJunitTest {
      */
     @Test
     public void userServiceTest() {
-        //UserService user = (UserService) ac.getBean("userService");
         LoginService loginService = (LoginService) ac.getBean("loginService");
-
-        loginService.checkUserInfo(new LoginInfoDTO());
-
-//        List<User> all = user.queryEntry(userVO1);
-//        if (all == null) {
-//
-//            System.out.println("对象为空");
-//        }
-//
-//        LOGGER.info("接口测试，对象数组容量:[{}]条", all.size());
-//        for (User userVO : all) {
-//            System.out.println(userVO);
-//        }
+//        LoginInfoDTO loginInfoDTO =null;
+//        String b = loginService.checkUserInfo(loginInfoDTO);
+        String b = loginService.checkUserInfo(new LoginInfoDTO("username", "password"),"unfair");
+        System.out.println("接口测试 :" + b);
     }
 
     @Test

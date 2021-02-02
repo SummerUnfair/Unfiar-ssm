@@ -12,5 +12,5 @@ public interface LoginService {
      *  用户是否存在
      * @return
      */
-    public boolean checkUserInfo(LoginInfoDTO dto);
+    public String checkUserInfo(LoginInfoDTO dto,String username);
 }

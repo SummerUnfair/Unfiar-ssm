@@ -6,7 +6,7 @@ package com.unfair.enumeration;
  * @discription
  */
 
-import com.unfair.aopUtils.ApiAnnotation;
+import com.unfair.aoputils.ApiAnnotation;
 import lombok.Getter;
 
 import java.util.ArrayList;

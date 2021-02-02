@@ -1,13 +1,12 @@
 package com.unfair.service.impl;
 
-import com.unfair.aopUtils.ApiAnnotation;
+import com.unfair.aoputils.ApiAnnotation;
 import com.unfair.bootstrap.base.BaseRequest;
 import com.unfair.bootstrap.base.BaseResponse;
 import com.unfair.db.dao.UserMapper;
 import com.unfair.db.model.User;
 import com.unfair.db.model.UserCriteria;
 import com.unfair.enumeration.StatusEnum;
-import com.unfair.mq.producer.MessageProducer;
 import com.unfair.bootstrap.response.CommonResult;
 import com.unfair.service.UserService;
 import org.slf4j.Logger;
@@ -31,14 +30,6 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserMapper userMapper;
-
-//    @Autowired
-//    private MessageProducer messageProducer;
-
-    @PostConstruct
-    public void init() {
-        log.info("用户模块，初始化...");
-    }
 
     @Override
     @ApiAnnotation(desc = "查询入口")

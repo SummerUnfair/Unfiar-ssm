@@ -1,6 +1,6 @@
 package com.unfair.bootstrap;
 
-import com.unfair.aopUtils.ApiAnnotation;
+import com.unfair.aoputils.ApiAnnotation;
 import com.unfair.db.dao.UserMapper;
 import com.unfair.common.RedisService;
 import com.unfair.db.model.User;
@@ -34,11 +34,13 @@ public class bizBootstrap implements ApplicationListener<ContextRefreshedEvent> 
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
-        if (event.getApplicationContext().getParent() == null) {   //root application context 没有parent
-            //其它逻辑
-            initNodeRelationalConfig();
-            LOGGER.info("==========系统启动成功==========");
-        }
+        //root application context 没有parent
+//        if (event.getApplicationContext().getParent() == null) {
+//
+//            //其它逻辑
+//            initNodeRelationalConfig();
+//            LOGGER.info("==========系统启动成功==========");
+//        }
     }
 
     /**
@@ -46,17 +48,16 @@ public class bizBootstrap implements ApplicationListener<ContextRefreshedEvent> 
      */
     @ApiAnnotation(desc = "初始化节点相关配置")
     private void initNodeRelationalConfig() {
-
-        redisService.del("unfair:user_node_info");
-        UserCriteria criteria = new UserCriteria();
-        List<User> users = userMapper.selectByExample(criteria);
-
-        if (users.size() != 0) {
-            LOGGER.info("查询服务结束,共[{}]条用户信息", users.size());
-            LOGGER.info("==========Redis初始化成功==========");
-        } else {
-            LOGGER.info("查询服务结束,共[{}]条用户信息", users.size());
-            LOGGER.info("==========Redis初始化失败==========");
-        }
+//        redisService.del("unfair:user_node_info");
+//        UserCriteria criteria = new UserCriteria();
+//        List<User> users = userMapper.selectByExample(criteria);
+//
+//        if (users.size() != 0) {
+//            LOGGER.info("查询服务结束,共[{}]条用户信息", users.size());
+//            LOGGER.info("==========Redis初始化成功==========");
+//        } else {
+//            LOGGER.info("查询服务结束,共[{}]条用户信息", users.size());
+//            LOGGER.info("==========Redis初始化失败==========");
+//        }
     }
 }
