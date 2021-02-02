@@ -11,6 +11,10 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.util.Assert;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import java.util.Set;
+
 public class ServiceJunitTest {
 
     private static Logger LOGGER = LoggerFactory.getLogger(ServiceJunitTest.class);
@@ -24,15 +28,32 @@ public class ServiceJunitTest {
     }
 
     /**
-     * 接口测试
+     * AOP面向切面测试
      */
     @Test
     public void userServiceTest() {
         LoginService loginService = (LoginService) ac.getBean("loginService");
-//        LoginInfoDTO loginInfoDTO =null;
-//        String b = loginService.checkUserInfo(loginInfoDTO);
+        //LoginInfoDTO loginInfoDTO =null;
+        //String b = loginService.checkUserInfo(loginInfoDTO);
         String b = loginService.checkUserInfo(new LoginInfoDTO("username", "password"),"unfair");
         System.out.println("接口测试 :" + b);
+    }
+
+    /**
+     * validation数据校验测试
+     */
+    @Test
+    public void validationTest() {
+
+        LoginInfoDTO loginInfoDTO = new LoginInfoDTO();
+        Set<ConstraintViolation<LoginInfoDTO>> result = Validation.buildDefaultValidatorFactory().getValidator().validate(loginInfoDTO,new Class[0]);
+
+        System.out.println(result);
+        System.out.println("==========================");
+        // 对结果进行遍历输出
+        result.stream().map(v -> v.getPropertyPath() + " " + v.getMessage() )
+                .forEach(System.out::println);
+
     }
 
     @Test

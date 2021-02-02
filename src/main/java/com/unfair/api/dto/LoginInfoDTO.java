@@ -3,6 +3,8 @@ package com.unfair.api.dto;
 import com.alibaba.fastjson.annotation.JSONField;
 import com.unfair.bootstrap.base.BaseRequest;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * @author fenghao
  * @discription
@@ -10,8 +12,10 @@ import com.unfair.bootstrap.base.BaseRequest;
  */
 public class LoginInfoDTO implements BaseRequest {
 
+    @NotNull(message = "用户名不能为null")
     @JSONField(name = "username")
     private String username;
+    @NotNull(message = "用户密码不能为null")
     @JSONField(name = "password")
     private String password;
 
