@@ -1,7 +1,8 @@
 package com.unfair.testInterface;
 
+import com.unfair.api.dto.BusinessReqDTO;
 import com.unfair.api.dto.UserDTO;
-import com.unfair.db.model.User;
+import com.unfair.bootstrap.base.BaseResponse;
 import com.unfair.mq.producer.MessageProducer;
 import com.unfair.service.UserService;
 import com.unfair.common.RedisService;
@@ -42,16 +43,7 @@ public class ServiceJunitTest {
         if (user ==null){
             System.out.println("user对象为空");
         }
-        List<User> all = user.queryEntry(userVO1);
-        if (all == null) {
-
-            System.out.println("对象为空");
-        }
-
-        LOGGER.info("接口测试，对象数组容量:[{}]条", all.size());
-        for (User userVO : all) {
-            System.out.println(userVO);
-        }
+        BaseResponse baseResponse = user.queryEntry(new BusinessReqDTO());
     }
 
     @Test
