@@ -1,5 +1,7 @@
 package com.unfair.bootstrap.base;
 
+import com.fasterxml.jackson.databind.ser.Serializers;
+
 import java.util.List;
 
 /**
@@ -15,4 +17,6 @@ public interface BaseUserService<T, E> extends BaseService {
      * @return
      */
     public BaseResponse queryEntry(BaseRequest request);
+
+    public boolean insertEntry(BaseRequest request);
 }

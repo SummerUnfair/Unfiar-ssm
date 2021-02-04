@@ -13,4 +13,9 @@ public interface LoginService {
      * @return
      */
     public String checkUserInfo(LoginInfoDTO dto,String username);
+
+    /**
+     *
+     */
+    public boolean insertUserInfo(LoginInfoDTO dto);
 }

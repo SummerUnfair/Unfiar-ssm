@@ -13,9 +13,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
-
-import javax.annotation.PostConstruct;
 import java.util.List;
 
 /**
@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
         log.info("主动查询开始");
 
         UserCriteria criteria = new UserCriteria();
-        criteria.setOrderByClause("updateTime DESC");
+        criteria.setOrderByClause("update_time DESC");
         List<User> user = userMapper.selectByExample(criteria);
       //  messageProducer.producerMessage("TopicTest","find_All","610622199805120911","msg:success ..");
 
@@ -50,5 +50,17 @@ public class UserServiceImpl implements UserService {
                 .respMsg(StatusEnum.SUCCESS.getDesc())
                 .data(user.get(0))
                 .build();
+    }
+
+    @Override
+    @Transactional(value = "transactionManager", propagation = Propagation.REQUIRED, rollbackFor =
+            RuntimeException.class)
+    public boolean insertEntry(BaseRequest request) {
+        userMapper.insert(new User("事务测试1"));
+        System.out.println("事务1执行完成");
+        userMapper.insert(new User("事务测试2"));
+        System.out.println("事务2执行完成");
+        userMapper.insert(new User(null));
+        return false;
     }
 }

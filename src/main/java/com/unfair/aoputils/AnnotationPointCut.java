@@ -14,8 +14,8 @@ import org.springframework.stereotype.Component;
  * @discription
  */
 //标注这个类是一个切面
-@Aspect
-@Component
+//@Aspect
+//@Component
 public class AnnotationPointCut {
 
     public static final Logger logger = LoggerFactory.getLogger(AnnotationPointCut.class);

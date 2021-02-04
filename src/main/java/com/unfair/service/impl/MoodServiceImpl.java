@@ -2,6 +2,7 @@ package com.unfair.service.impl;
 
 import com.unfair.enumeration.StatusEnum;
 import com.unfair.service.MoodService;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author fenghao

@@ -9,6 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import javax.validation.ConstraintViolation;
@@ -65,7 +67,23 @@ public class ServiceJunitTest {
 
     }
 
+    /**
+     * Transaction事务测试
+     */
+
     @Test
+    @Transactional(value = "transactionManager", propagation = Propagation.REQUIRED, rollbackFor =
+            RuntimeException.class)
+    public void transactionTest() {
+
+        LoginService loginService = (LoginService) ac.getBean("loginService");
+
+        loginService.insertUserInfo(new LoginInfoDTO());
+    }
+
+
+    @Test
+    @Transactional
     public void assertTest() {
         String location = null;
         Assert.notNull(location, "Location must not be null");
